@@ -1,0 +1,52 @@
+name: Python package
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '^3.9'
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+
+      - name: Install root project, if required
+        run: poetry install --no-interaction
+
+      - name: Code quality checks
+        run: |
+          source $VENV
+          isort --check-only --profile black .
+          black --check .
+          flake8 --ignore D203 --exclude .venv,.git,__pycache__,docs/source/conf.py,old,build,dist --max-complexity 10
+          mypy src/*
+          mypy tests/*
+
+      - name: Test with pytest
+        run: |
+          source $VENV
+          python -m pytest
+
+      - name: Run tests and collect coverage
+        run: |
+          pip install pytest-cov
+          pytest --cov src
+
+      - name: Upload coverage to Codecov
+        run: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov -t ${CODECOV_TOKEN}
