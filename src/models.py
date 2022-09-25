@@ -1,7 +1,7 @@
 from typing import Optional
 
 from bson import ObjectId
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 
 class PyObjectId(ObjectId):
