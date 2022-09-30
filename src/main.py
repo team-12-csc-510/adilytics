@@ -1,22 +1,13 @@
-import os
-from typing import Union
-
-from fastapi import FastAPI
-from motor import motor_asyncio
+from fastapi import APIRouter, FastAPI
 
 from . import config
+from .routes import health_route, user_route
 
 app = FastAPI()
 settings = config.Settings()
-client = motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URL"])
-db = client.users
 
+router = APIRouter()
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+router.include_router(health_route.router)
+router.include_router(user_route.router)
+app.include_router(router)
