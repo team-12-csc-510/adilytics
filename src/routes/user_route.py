@@ -1,9 +1,9 @@
 from typing import List
 
-from fastapi import APIRouter, Body, status, HTTPException
+from fastapi import APIRouter, Body, HTTPException, status
 from fastapi.responses import JSONResponse
 
-from src.models.user_model import UserModel
+from src.models.user_model import UpdateUserModel, UserModel
 from src.services import user_service as user_service
 
 router = APIRouter(prefix="/user")
@@ -15,18 +15,34 @@ async def create_user(user: UserModel = Body(...)):
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_user)
 
 
-@router.get(
-    "/", response_description="List all users", response_model=List[UserModel]
-)
+@router.get("/", response_description="List all users", response_model=List[UserModel])
 async def list_users():
     users = await user_service.list_users()
     return JSONResponse(status_code=status.HTTP_200_OK, content=users)
 
 
-@router.get(
-    "/{id}", response_description="Get a single user", response_model=UserModel
-)
-async def get_user(user_id: str):
-    if (user := user_service.get_user(user_id)) is not None:
+@router.get("/{id}", response_description="Get a single user", response_model=UserModel)
+async def get_user(id: str):
+    if (user := await user_service.get_user(id)) is not None:
         return JSONResponse(status_code=status.HTTP_200_OK, content=user)
-    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Student {id} not found")
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail=f"User {id} not found"
+    )
+
+
+@router.patch("/{id}", response_description="Update a user", response_model=UserModel)
+async def update_user(id: str, user: UpdateUserModel = Body(...)):
+    if (user := await user_service.update_user(id, user)) is not None:
+        return JSONResponse(status_code=status.HTTP_200_OK, content=user)
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail=f"User {id} not found"
+    )
+
+
+@router.delete("/{id}", response_description="Delete a user")
+async def delete_user(id: str):
+    if user_service.delete_user(id):
+        return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content=None)
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail=f"User {id} not found"
+    )

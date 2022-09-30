@@ -1,7 +1,7 @@
 from fastapi.encoders import jsonable_encoder
 
 from src.database import database
-from src.models.user_model import UserModel
+from src.models.user_model import UpdateUserModel, UserModel
 
 
 async def create_user(user: UserModel):
@@ -19,3 +19,26 @@ async def list_users(limit: int = 1000):
 async def get_user(id: str):
     if (user := await database["users"].find_one({"_id": id})) is not None:
         return user
+
+
+async def update_user(id: str, user: UpdateUserModel):
+    user = {k: v for k, v in user.dict().items() if v is not None}
+
+    if len(user) >= 1:
+        update_result = await database["users"].update_one({"_id": id}, {"$set": user})
+
+        if update_result.modified_count == 1:
+            if (
+                updated_user := await database["users"].find_one({"_id": id})
+            ) is not None:
+                return updated_user
+
+    if (existing_user := await database["users"].find_one({"_id": id})) is not None:
+        return existing_user
+
+
+async def delete_user(id: str):
+    delete_result = await database["users"].delete_one({"_id": id})
+    if delete_result.deleted_count == 1:
+        return True
+    return False
