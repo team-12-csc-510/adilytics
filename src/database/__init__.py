@@ -1,7 +1,7 @@
 import os
 
-import motor.motor_asyncio
+from motor.motor_asyncio import AsyncIOMotorClient  # type: ignore
 
-client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URL"])
+client = AsyncIOMotorClient(os.environ["MONGODB_URL"])
 
 database = client.adilytics

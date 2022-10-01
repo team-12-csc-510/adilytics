@@ -1,3 +1,5 @@
+from typing import Dict
+
 from fastapi.encoders import jsonable_encoder
 
 from src.database import database
@@ -7,7 +9,9 @@ from src.models.user_model import UpdateUserModel, UserModel
 async def create_user(user: UserModel):
     user = jsonable_encoder(user)
     new_user = await database["users"].insert_one(user)
-    created_user = await database["users"].find_one({"_id": new_user.inserted_id})
+    created_user = await database["users"].find_one(
+        {"_id": new_user.inserted_id}
+    )
     return created_user
 
 
@@ -22,10 +26,14 @@ async def get_user(id: str):
 
 
 async def update_user(id: str, user: UpdateUserModel):
-    user = {k: v for k, v in user.dict().items() if v is not None}
+    user_dict: Dict[str, str] = {
+        k: v for k, v in user.dict().items() if v is not None
+    }
 
-    if len(user) >= 1:
-        update_result = await database["users"].update_one({"_id": id}, {"$set": user})
+    if len(user_dict) >= 1:
+        update_result = await database["users"].update_one(
+            {"_id": id}, {"$set": user_dict}
+        )
 
         if update_result.modified_count == 1:
             if (
@@ -33,7 +41,9 @@ async def update_user(id: str, user: UpdateUserModel):
             ) is not None:
                 return updated_user
 
-    if (existing_user := await database["users"].find_one({"_id": id})) is not None:
+    if (
+        existing_user := await database["users"].find_one({"_id": id})
+    ) is not None:
         return existing_user
 
 
