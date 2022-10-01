@@ -13,6 +13,8 @@ motor = "^3.0.0"
 dnspython = "^2.2.1"
 python-dotenv = "^0.21.0"
 pydantic = {version = "^1.10.2", extras = ["email"]}
+pytz = "^2022.2.1"
+types-pytz = "^2022.2.1.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.0"

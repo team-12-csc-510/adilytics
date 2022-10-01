@@ -8,3 +8,8 @@ class Databases(Enum):
 class Collections(Enum):
     users = auto()
     analytics = auto()
+    ad = auto()
+    click = auto()
+    company = auto()
+    location = auto()
+    product = auto()
