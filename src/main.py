@@ -1,7 +1,7 @@
 from fastapi import APIRouter, FastAPI
 
 from . import config
-from .routes import health_route, user_route, location_route
+from .routes import health_route, location_route, user_route
 
 app = FastAPI()
 settings = config.Settings()
