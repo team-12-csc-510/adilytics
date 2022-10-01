@@ -9,3 +9,4 @@ client = AsyncIOMotorClient(os.getenv('MONGODB_URL')) #to be commented added by 
 #client = AsyncIOMotorClient(os.environ["MONGODB_URL"]) #actual line
 
 database = client.adilytics
+
