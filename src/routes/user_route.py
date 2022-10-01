@@ -39,10 +39,13 @@ async def update_user(id: str, user: UpdateUserModel = Body(...)):
     )
 
 
-@router.delete("/{id}", response_description="Delete a user")
+@router.delete(
+    "/{id}",
+    response_description="Delete a user",
+    status_code=status.HTTP_204_NO_CONTENT,
+)
 async def delete_user(id: str):
-    if user_service.delete_user(id):
-        return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content=None)
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND, detail=f"User {id} not found"
-    )
+    if not await user_service.delete_user(id):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"User {id} not found"
+        )

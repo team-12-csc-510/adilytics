@@ -21,7 +21,8 @@ class LocationModel(BaseModel):
 
 
 class UpdateLocationModel(BaseModel):
-    name: Optional[str]
+    city: Optional[str]
+    state: Optional[str]
 
     class Config:
         arbitrary_types_allowed = True

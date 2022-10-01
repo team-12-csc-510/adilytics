@@ -45,10 +45,13 @@ async def update_location(id: str, location: UpdateLocationModel = Body(...)):
     )
 
 
-@router.delete("/{id}", response_description="Delete a location")
+@router.delete(
+    "/{id}",
+    response_description="Delete a location",
+    status_code=status.HTTP_204_NO_CONTENT,
+)
 async def delete_location(id: str):
-    if location_service.delete_location(id):
-        return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content=None)
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND, detail=f"location {id} not found"
-    )
+    if not await location_service.delete_location(id):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"location {id} not found"
+        )
