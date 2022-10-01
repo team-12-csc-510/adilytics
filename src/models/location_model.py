@@ -12,15 +12,12 @@ class LocationModel(BaseModel):
     City: str = Field(...)
     State: str = Field(...)
 
-
     class Config:
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
 
-        schema_extra = {"example": {"City": "Raleigh",
-                                    "State": "North Carolina"}}
-
+        schema_extra = {"example": {"City": "Raleigh", "State": "North Carolina"}}
 
 
 class UpdateLocationModel(BaseModel):
@@ -29,6 +26,4 @@ class UpdateLocationModel(BaseModel):
     class Config:
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
-        schema_extra = {"example": {"City": "Raleigh",
-                                    "State": "North Carolina"}}
-
+        schema_extra = {"example": {"City": "Raleigh", "State": "North Carolina"}}
