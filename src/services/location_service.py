@@ -51,7 +51,7 @@ async def update_location(id: str, location: UpdateLocationModel):
         return existing_location
 
 
-async def delete_user(id: str):
+async def delete_location(id: str):
     delete_result = await location_db.collection.delete_one({"_id": id})
     if delete_result.deleted_count == 1:
         return True
