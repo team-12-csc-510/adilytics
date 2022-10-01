@@ -4,7 +4,7 @@ from fastapi import APIRouter, Body, HTTPException, status
 from fastapi.responses import JSONResponse
 
 from src.models.user_model import UpdateUserModel, UserModel
-from src.services import user_service as user_service
+from src.services import user_service
 
 router = APIRouter(prefix="/user")
 
