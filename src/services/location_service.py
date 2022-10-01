@@ -33,7 +33,7 @@ async def get_location(id: str):
         return location
 
 
-async def update_user(id: str, location: UpdateLocationModel):
+async def update_location(id: str, location: UpdateLocationModel):
     location_dict: Dict[str, str] = {k: v for k, v in location.dict().items() if v is not None}
 
     if len(location_dict) >= 1:
