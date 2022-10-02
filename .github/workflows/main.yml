@@ -42,7 +42,7 @@ jobs:
 
       - name: Run tests and collect coverage
         env:
-          MONGODB_URL: ${MONGODB_URL}
+          MONGODB_URL: "${{ env.MONGODB_URL }}"
         run: |
           pip install pytest-cov
           pytest --cov src
