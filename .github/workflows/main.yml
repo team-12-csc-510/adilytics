@@ -36,7 +36,10 @@ jobs:
           mypy tests/*
 
       - name: Test with pytest
+        env:
+          MONGODB_URL: ${{ secrets.MONGODB_URL }}
         run: |
+          echo ${{ secrets.MONGODB_URL }}
           source $VENV
           python -m pytest
 
