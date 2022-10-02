@@ -42,6 +42,10 @@ jobs:
 
       - name: Run tests and collect coverage
         run: |
+          if [ "$MONGODB_URL" -eq "" ]
+          then
+            echo "No MONGODB_URL"
+          fi
           echo $MONGODB_URL
           pip install pytest-cov
           pytest --cov src
