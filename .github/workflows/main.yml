@@ -36,7 +36,14 @@ jobs:
           mypy tests/*
 
       - name: Test with pytest
+        env:
+          MONGODB_URL: ${{ secrets.MONGODB_URL }}
         run: |
+          if [ "$MONGODB_URL" == "" ]
+          then
+            echo "No MONGODB URL"
+          fi
+          echo $MONGODB_URL
           source $VENV
           python -m pytest
 
