@@ -1,8 +1,8 @@
-from enum import Enum, auto
+from enum import Enum
 
 
 class AdType(Enum):
-    SMALL = auto()
-    MEDIUM = auto()
-    LARGE = auto()
-    VIDEO = auto()
+    SMALL = "SMALL"
+    MEDIUM = "MEDIUM"
+    LARGE = "LARGE"
+    VIDEO = "VIDEO"
