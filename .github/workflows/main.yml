@@ -41,10 +41,11 @@ jobs:
           python -m pytest
 
       - name: Run tests and collect coverage
+        env:
+          MONGODB_URL: $MONGODB_URL
         run: |
-          echo $MONGODB_URL
-#          pip install pytest-cov
-#          pytest --cov src
+          pip install pytest-cov
+          pytest --cov src
 
       - name: Upload coverage to Codecov
         run: |
