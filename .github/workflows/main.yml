@@ -56,8 +56,8 @@ jobs:
             echo "No MONGODB URL"
           fi
           echo $MONGODB_URL
-          pip install pytest-cov
-          pytest --cov src
+          poetry add pytest-cov
+          python -m pytest --cov src
 
       - name: Upload coverage to Codecov
         run: |
