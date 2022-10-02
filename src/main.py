@@ -1,8 +1,14 @@
 from fastapi import APIRouter, FastAPI
 
 from . import config
-from .routes import ad_route, company_route, click_route, health_route, location_route, user_route
-
+from .routes import (
+    ad_route,
+    click_route,
+    company_route,
+    health_route,
+    location_route,
+    user_route,
+)
 
 app = FastAPI()
 settings = config.Settings()
