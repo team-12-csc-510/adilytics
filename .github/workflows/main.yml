@@ -44,9 +44,9 @@ jobs:
         env:
           MONGODB_URL: ${{ secrets.MONGODB_URL }}
         run: |
-          if [ "$MONGODB_URL" -eq "" ]
+          if [ "$MONGODB_URL" == "" ]
           then
-            echo "No MONGODB_URL"
+            echo "No MONGODB URL"
           fi
           echo $MONGODB_URL
           poetry add pytest-cov
