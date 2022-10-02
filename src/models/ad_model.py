@@ -4,13 +4,14 @@ from bson import ObjectId
 from pydantic import BaseModel, Field
 
 from src.models import PyObjectId
+from src.utils.ad_const import AdType
 
 
 class AdModel(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     company_id: str = Field(...)
     product_id: str = Field(...)
-    type: str = Field(...)
+    type: AdType = Field(...)
     is_active: bool = Field(...)
 
     class Config:

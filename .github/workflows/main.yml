@@ -1,10 +1,11 @@
-name: Python package
+name: dev
 
 on: [push]
 
 jobs:
   build:
-
+    name: Build App
+    environment: dev
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -36,14 +37,28 @@ jobs:
           mypy tests/*
 
       - name: Test with pytest
+        env:
+          MONGODB_URL: ${{ secrets.MONGODB_URL }}
         run: |
+          if [ "$MONGODB_URL" == "" ]
+          then
+            echo "No MONGODB URL"
+          fi
+          echo $MONGODB_URL
           source $VENV
           python -m pytest
 
       - name: Run tests and collect coverage
+        env:
+          MONGODB_URL: ${{ secrets.MONGODB_URL }}
         run: |
-          pip install pytest-cov
-          pytest --cov src
+          if [ "$MONGODB_URL" == "" ]
+          then
+            echo "No MONGODB URL"
+          fi
+          echo $MONGODB_URL
+          source $VENV
+          python -m pytest --cov src
 
       - name: Upload coverage to Codecov
         run: |
