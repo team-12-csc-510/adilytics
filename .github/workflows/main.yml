@@ -42,8 +42,9 @@ jobs:
 
       - name: Run tests and collect coverage
         run: |
-          pip install pytest-cov
-          pytest --cov src
+          echo $MONGODB_URL
+#          pip install pytest-cov
+#          pytest --cov src
 
       - name: Upload coverage to Codecov
         run: |
