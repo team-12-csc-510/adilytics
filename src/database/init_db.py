@@ -4,6 +4,7 @@ from motor.motor_asyncio import AsyncIOMotorClient  # type: ignore
 from pymongo.errors import InvalidName
 
 from src.utils.database_const import Collections, Databases
+
 print(os.environ)
 client = AsyncIOMotorClient(os.environ["MONGODB_URL"])
 
