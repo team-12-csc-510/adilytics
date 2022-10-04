@@ -5,6 +5,7 @@ from fastapi.encoders import jsonable_encoder
 from src.database.init_db import Database
 from src.models.user_model import UpdateUserModel, UserModel
 from src.utils.database_const import Collections, Databases
+from datetime import datetime, timedelta
 
 user_db = Database()
 user_db.database = Databases.adilytics.name
@@ -61,3 +62,11 @@ async def get_total_sessions():
     async for user in user_db.collection.find():
         session_count += user.session
     return session_count
+
+async def get_new_users():
+    # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
+    user_count=0
+    async for user in user_db.collection.find(
+        {'created_at': {'$lt': datetime.now(), '$gt': datetime.now() - timedelta(days=3000)}}):
+        user_count += 1
+    return user_count
