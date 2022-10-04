@@ -5,6 +5,7 @@ from fastapi.encoders import jsonable_encoder
 from src.database.init_db import Database
 from src.models.click_model import ClickModel, UpdateClickModel
 from src.utils.database_const import Collections, Databases
+from src.utils.time_utils import now, str2datetime, timediff30
 
 click_db = Database()
 click_db.database = Databases.adilytics.name
@@ -57,3 +58,21 @@ async def delete_click(id: str):
     if delete_result.deleted_count == 1:
         return True
     return False
+
+
+async def list_all_clicks(limit: int = 1000):
+    # TODO: remove to_list & add skip and list
+    # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
+    clicks = await click_db.collection.find().to_list(limit)
+    allclk: Dict = dict()
+    for inst in clicks:
+        dt_now = now()
+        dt_inst = str2datetime(inst.get("updated_at"))
+        if timediff30(dt_now - dt_inst):
+            if allclk.get(inst.get("ad_id")) is None:
+                allclk[inst.get("ad_id")] = 1
+            else:
+                allclk[inst.get("ad_id")] += 1
+        else:
+            allclk[inst.get("ad_id")] = 0
+    return allclk

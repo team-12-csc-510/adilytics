@@ -18,7 +18,7 @@ async def create_click(click: ClickModel = Body(...)):
 @router.get(
     "/", response_description="List all clicks", response_model=List[ClickModel]
 )
-async def list_locations():
+async def list_clicks():
     clicks = await click_service.list_clicks()
     return JSONResponse(status_code=status.HTTP_200_OK, content=clicks)
 
@@ -53,3 +53,13 @@ async def delete_click(id: str):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=f"Click {id} not found"
         )
+
+
+@router.get(
+    "/all/clicks30",
+    response_description="List all clicks days",
+    response_model=List[ClickModel],
+)
+async def list_clicks30d():
+    clicks = await click_service.list_all_clicks()
+    return JSONResponse(status_code=status.HTTP_200_OK, content=clicks)
