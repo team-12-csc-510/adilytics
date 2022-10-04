@@ -45,7 +45,7 @@ async def update_click(id: str, click: UpdateClickModel):
 
         if update_result.modified_count == 1:
             if (
-                updated_click := await click_db.collection.find_one({"_id": id})
+                    updated_click := await click_db.collection.find_one({"_id": id})
             ) is not None:
                 return updated_click
 
@@ -76,3 +76,11 @@ async def list_all_clicks(limit: int = 1000):
         else:
             allclk[inst.get("ad_id")] = 0
     return allclk
+
+
+async def get_total_clicks():
+    # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
+    click_count = 0
+    async for click in click_db.collection.find():
+        click_count += 1
+    return click_count

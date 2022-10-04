@@ -40,7 +40,7 @@ async def update_user(id: str, user: UpdateUserModel):
 
         if update_result.modified_count == 1:
             if (
-                updated_user := await user_db.collection.find_one({"_id": id})
+                    updated_user := await user_db.collection.find_one({"_id": id})
             ) is not None:
                 return updated_user
 
@@ -53,3 +53,11 @@ async def delete_user(id: str):
     if delete_result.deleted_count == 1:
         return True
     return False
+
+
+async def get_total_sessions():
+    # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
+    session_count = 0
+    async for user in user_db.collection.find():
+        session_count += user.session
+    return session_count
