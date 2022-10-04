@@ -84,3 +84,23 @@ async def get_total_clicks():
     async for click in click_db.collection.find():
         click_count += 1
     return click_count
+
+
+async def list_all_clicks_and_converted(limit: int = 1000):
+    # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
+    clicks = await click_db.collection.find({'is_converted': True}).to_list(limit)
+    allclk: Dict = dict()
+    for inst in clicks:
+        try:
+            dt_now = now()
+            dt_inst = str2datetime(inst.get("updated_at"))
+            if timediff30(dt_now - dt_inst):
+                if allclk.get(inst.get("ad_id")) is None:
+                    allclk[inst.get("ad_id")] = 1
+                else:
+                    allclk[inst.get("ad_id")] += 1
+            else:
+                allclk[inst.get("ad_id")] = 0
+        except:
+            pass
+    return allclk
