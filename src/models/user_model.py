@@ -30,7 +30,7 @@ class UserModel(BaseModel):
                 "age": 25,
                 "session": 1,
                 "created_at": "2020-11-09T18:23:28+01:00",
-                "updated_at": "2020-11-09T18:23:28+01:00"
+                "updated_at": "2020-11-09T18:23:28+01:00",
             }
         }
 
