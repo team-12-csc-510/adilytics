@@ -1,9 +1,11 @@
+from datetime import datetime
 from typing import Optional
 
 from bson import ObjectId
 from pydantic import BaseModel, EmailStr, Field
 
 from src.models import PyObjectId
+from src.utils import time_utils
 
 
 class UserModel(BaseModel):
@@ -13,6 +15,8 @@ class UserModel(BaseModel):
     location_id: str = Field(...)
     age: int = Field(...)
     session: int = Field(...)
+    created_at: datetime = time_utils.now()
+    updated_at: datetime = time_utils.now()
 
     class Config:
         allow_population_by_field_name = True
@@ -24,7 +28,9 @@ class UserModel(BaseModel):
                 "email": "ritwik@example.com",
                 "location_id": "970f3bf7-96ec-47e8-8555-05aec91f92db",
                 "age": 25,
-                "session_id": "876a8c88-8458-4fee-b656-37decd4aa537",
+                "session": 1,
+                "created_at": "2020-11-09T18:23:28+01:00",
+                "updated_at": "2020-11-09T18:23:28+01:00"
             }
         }
 
