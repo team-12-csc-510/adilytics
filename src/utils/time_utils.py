@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-import pytz
+import pytz  # type:ignore
 
 
 def now():
@@ -17,7 +17,7 @@ def str2datetime(dateandtime: str) -> datetime:
     return datetime.strptime(dateandtime, "%Y-%m-%dT%H:%M:%S%z")
 
 
-def timediff30(diff: datetime) -> bool:
+def timediff30(diff: timedelta) -> bool:
     if diff < timedelta(30):
         return True
     else:

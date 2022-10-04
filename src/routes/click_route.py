@@ -56,7 +56,9 @@ async def delete_click(id: str):
 
 
 @router.get(
-    "/all/clicks30", response_description="List all clicks days", response_model=List[ClickModel]
+    "/all/clicks30",
+    response_description="List all clicks days",
+    response_model=List[ClickModel],
 )
 async def list_clicks30d():
     clicks = await click_service.list_all_clicks()
