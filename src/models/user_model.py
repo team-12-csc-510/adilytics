@@ -12,7 +12,7 @@ class UserModel(BaseModel):
     email: EmailStr = Field(...)
     location_id: str = Field(...)
     age: int = Field(...)
-    session_id: str = Field(...)
+    session: int = Field(...)
 
     class Config:
         allow_population_by_field_name = True
@@ -34,7 +34,7 @@ class UpdateUserModel(BaseModel):
     email: Optional[EmailStr]
     location_id: Optional[str]
     age: Optional[int]
-    session_id: Optional[str]
+    session: Optional[int]
 
     class Config:
         arbitrary_types_allowed = True
