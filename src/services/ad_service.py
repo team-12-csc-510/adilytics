@@ -4,7 +4,7 @@ from fastapi.encoders import jsonable_encoder
 
 from src.database.init_db import Database
 from src.models.ad_model import AdModel, UpdateAdModel
-from src.services.click_service import list_all_clicks, list_all_clicks_and_converted
+from src.services.click_service import list_all_clicks_and_converted
 from src.services.product_service import get_product
 from src.utils.database_const import Collections, Databases
 
@@ -61,6 +61,6 @@ async def get_conversions():
     total_conversions = 0
     for ad in converted_ads:
         ad_detail = await get_ad(ad)
-        product_detail = await get_product(ad_detail['product_id'])
-        total_conversions += product_detail['cost'] * converted_ads[ad]
+        product_detail = await get_product(ad_detail["product_id"])
+        total_conversions += product_detail["cost"] * converted_ads[ad]
     return total_conversions

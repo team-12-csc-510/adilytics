@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from typing import Dict
 
 from fastapi.encoders import jsonable_encoder
@@ -6,7 +7,6 @@ from src.database.init_db import Database
 from src.models.click_model import ClickModel, UpdateClickModel
 from src.utils.database_const import Collections, Databases
 from src.utils.time_utils import now, str2datetime, timediff30
-from datetime import datetime,timedelta
 
 click_db = Database()
 click_db.database = Databases.adilytics.name
@@ -46,7 +46,7 @@ async def update_click(id: str, click: UpdateClickModel):
 
         if update_result.modified_count == 1:
             if (
-                    updated_click := await click_db.collection.find_one({"_id": id})
+                updated_click := await click_db.collection.find_one({"_id": id})
             ) is not None:
                 return updated_click
 
@@ -92,7 +92,9 @@ async def list_all_clicks_and_converted(limit: int = 1000):
     today = datetime.today()
     days_back = today - timedelta(days=30)
     allclk: Dict = dict()
-    async for click in click_db.collection.find({'is_converted': True, 'created_at': {'$gte': str(days_back)}}):
+    async for click in click_db.collection.find(
+        {"is_converted": True, "created_at": {"$gte": str(days_back)}}
+    ):
         if allclk.get(click.get("ad_id")) is None:
             allclk[click.get("ad_id")] = 1
         else:

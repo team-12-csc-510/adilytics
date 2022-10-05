@@ -2,6 +2,7 @@
 
 ![example branch parameter](https://github.com/team-12-csc-510/adilytics/actions/workflows/main.yml/badge.svg?branch=main)
 [![PyPI - License](https://img.shields.io/pypi/l/FastAPI)](https://opensource.org/licenses/MIT)
+
 # Project 1: Perform the advertisement analytics on a platform and visualise the results.
 
 Team 12's submission for Project 1 for CSC-510.
@@ -52,8 +53,9 @@ This project is licensed under MIT license available in [LICENSE](https://github
 
 ______________________________________________________________________
 
-## Tools 
-<ins>**Fast Api**</ins> 
+## Tools
+
+<ins>**Fast Api**</ins>
 
 This project makes use of FAST API.
 You can refer to the link to learn more about its working [FAST API](https://fastapi.tiangolo.com) .
@@ -61,12 +63,13 @@ You can refer to the link to learn more about its working [FAST API](https://fas
 FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints.
 
 Some key features are:
-* **Fast**: Very high performance, on par with **NodeJS** and **Go** (thanks to Starlette and Pydantic). [One of the fastest Python frameworks available](#performance).
-* **Fast to code**: Increase the speed to develop features by about 200% to 300%. 
-* **Fewer bugs**: Reduce about 40% of human (developer) induced errors. 
-* **Standards-based**: Based on (and fully compatible with) the open standards for APIs: <a href="https://github.com/OAI/OpenAPI-Specification" class="external-link" target="_blank">OpenAPI</a> (previously known as Swagger) and <a href="https://json-schema.org/" class="external-link" target="_blank">JSON Schema</a>.
 
-<ins>**Locust**</ins> 
+- **Fast**: Very high performance, on par with **NodeJS** and **Go** (thanks to Starlette and Pydantic). [One of the fastest Python frameworks available](#performance).
+- **Fast to code**: Increase the speed to develop features by about 200% to 300%.
+- **Fewer bugs**: Reduce about 40% of human (developer) induced errors.
+- **Standards-based**: Based on (and fully compatible with) the open standards for APIs: <a href="https://github.com/OAI/OpenAPI-Specification" class="external-link" target="_blank">OpenAPI</a> (previously known as Swagger) and <a href="https://json-schema.org/" class="external-link" target="_blank">JSON Schema</a>.
+
+<ins>**Locust**</ins>
 
 This project makes use of Locust.
 You can refer to the link to learn more about its working [Locust](https://docs.locust.io/en/stable/installation.html).
@@ -74,8 +77,6 @@ You can refer to the link to learn more about its working [Locust](https://docs.
 Locust is used to run load tests distributed over multiple machines. It is event-based (using [gevent](http://www.gevent.org/)), which makes it possible for a single process to handle many thousands concurrent users. While there alternatives capable of doing more requests per second on a given hardware, the low overhead of each Locust user makes it very suitable for testing highly concurrent workloads.
 
 ______________________________________________________________________
-
-
 
 ## Team
 
@@ -91,4 +92,3 @@ ______________________________________________________________________
 
 [poetry]: https://python-poetry.org/
 [python]: https://python.org
-

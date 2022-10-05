@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from typing import Dict
 
 from fastapi.encoders import jsonable_encoder
@@ -5,7 +6,6 @@ from fastapi.encoders import jsonable_encoder
 from src.database.init_db import Database
 from src.models.user_model import UpdateUserModel, UserModel
 from src.utils.database_const import Collections, Databases
-from datetime import datetime, timedelta
 
 user_db = Database()
 user_db.database = Databases.adilytics.name
@@ -41,7 +41,7 @@ async def update_user(id: str, user: UpdateUserModel):
 
         if update_result.modified_count == 1:
             if (
-                    updated_user := await user_db.collection.find_one({"_id": id})
+                updated_user := await user_db.collection.find_one({"_id": id})
             ) is not None:
                 return updated_user
 
@@ -60,7 +60,8 @@ async def get_total_sessions():
     # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
     session_count = 0
     async for user in user_db.collection.find():
-        session_count += user.session
+        if "session" in user.keys():
+            session_count += user["session"]
     return session_count
 
 
@@ -69,7 +70,6 @@ async def get_new_users():
     user_count = 0
     today = datetime.today()
     days_back = today - timedelta(days=30)
-    async for user in user_db.collection.find(
-            {'created_at': {'$gte': str(days_back)}}):
+    async for user in user_db.collection.find({"created_at": {"$gte": str(days_back)}}):
         user_count += 1
     return user_count

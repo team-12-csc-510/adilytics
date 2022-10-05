@@ -1,23 +1,20 @@
-from typing import Dict
-
-from fastapi.encoders import jsonable_encoder
-
-from src.database.init_db import Database
-from src.models.ad_model import AdModel, UpdateAdModel
-from src.routes.company_route import list_companies
 from src.services.ad_service import get_conversions
-from src.services.click_service import list_all_clicks, get_total_clicks, list_all_clicks_and_converted
-from src.services.location_service import list_locations
-from src.services.user_service import get_total_sessions, get_new_users
-from src.utils.database_const import Collections, Databases
-
-ad_db = Database()
-ad_db.database = Databases.adilytics.name
-ad_db.collection = Collections.ad.name
+from src.services.click_service import get_total_clicks
+from src.services.user_service import get_new_users, get_total_sessions
 
 
 async def create_obj():
-    # click_count = await list_all_clicks()
-    # total_sessions = await get_total_clicks()
-    total_conversion= await get_conversions()
-    return total_conversion
+    # click count in last month
+    data = {}
+    # data["click_count"] = await list_all_clicks()
+    # bounce rate= clicks/ sessions
+    total_clicks = await get_total_clicks()
+    total_session = await get_total_sessions()
+    bounce_rate = ((total_session - total_clicks) / total_session) * 100
+    bounce_rate = format(bounce_rate, ".2f")
+    data["bounce_rate"] = bounce_rate
+    # conversions
+    data["total_conversion"] = await get_conversions()
+    # new users
+    data["total_new_users"] = await get_new_users()
+    return data

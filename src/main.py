@@ -7,9 +7,10 @@ from .routes import (
     click_route,
     company_route,
     health_route,
+    index_route,
     location_route,
     product_route,
-    user_route, index_route,
+    user_route,
 )
 
 app = FastAPI()
