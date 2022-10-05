@@ -13,12 +13,9 @@ def stringify(datetime_object: datetime = now()) -> str:
     raise ValueError("Invalid Time Zone")
 
 
-def str2datetime(dateandtime: str) -> datetime:
-    return datetime.strptime(dateandtime, "%Y-%m-%dT%H:%M:%S%z")
+def time_now() -> datetime:
+    return datetime.now()
 
 
-def timediff30(diff: timedelta) -> bool:
-    if diff < timedelta(30):
-        return True
-    else:
-        return False
+def timediff30(diff: datetime) -> timedelta:
+    return diff - timedelta(days=30)

@@ -12,6 +12,14 @@ ad_db.collection = Collections.ad.name
 
 
 async def create_ad(ad: AdModel):
+    """
+    function to insert the tuple into the ad collection.
+
+    :param ad: AdModel object containing the tuple values.
+    :type: ad: AdModel object
+
+    :returns: the created entry.
+    """
     ad = jsonable_encoder(ad)
     new_ad = await ad_db.collection.insert_one(ad)
     created_ad = await ad_db.collection.find_one({"_id": new_ad.inserted_id})
@@ -19,6 +27,13 @@ async def create_ad(ad: AdModel):
 
 
 async def list_ads(limit: int = 1000):
+    """
+    function to retrieve all the tuples from the collection.
+
+    :param limit: limit for the number of tuples to be retrieved
+    :type limit: int
+    :return: all the entries in the ad collection
+    """
     # TODO: remove to_list & add skip and list
     # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
     ads = await ad_db.collection.find().to_list(limit)
@@ -26,11 +41,30 @@ async def list_ads(limit: int = 1000):
 
 
 async def get_ad(id: str):
+    """
+    function to fetch a particular tuple form the ad collection.
+
+    :param id: unique id for the tuple in the ad collection
+    :type id: str
+
+    :returns: the requested tuple.
+    """
     if (ad := await ad_db.collection.find_one({"_id": id})) is not None:
         return ad
 
 
 async def update_ad(id: str, ad: UpdateAdModel):
+    """
+    function for updating a tuple form the ad collection.
+
+    :param id: unique id for the tuple to be updated.
+    :type: id: str
+
+    :param ad: UpdateAdModel object containing the updated tuple values.
+    :type: ad: UpdatedAdModel object
+
+    :returns: the updated entry.
+    """
     ad_dict: Dict[str, str] = {k: v for k, v in ad.dict().items() if v is not None}
 
     if len(ad_dict) >= 1:
@@ -47,6 +81,12 @@ async def update_ad(id: str, ad: UpdateAdModel):
 
 
 async def delete_ad(id: str):
+    """
+    function to  for deleting a tuple form the ad collection.
+
+    :param id: unique id for the tuple to be deleted.
+    :type: id: str
+    """
     delete_result = await ad_db.collection.delete_one({"_id": id})
     if delete_result.deleted_count == 1:
         return True

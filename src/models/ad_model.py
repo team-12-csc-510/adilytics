@@ -8,6 +8,11 @@ from src.utils.ad_const import AdType
 
 
 class AdModel(BaseModel):
+    """
+    AdModel class used to define the database schema for the
+    ads collection in the Mongodb. It will provide the object that will
+    be used to interact with the ad cluster.
+    """
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     company_id: str = Field(...)
     product_id: str = Field(...)
@@ -15,6 +20,12 @@ class AdModel(BaseModel):
     is_active: bool = Field(...)
 
     class Config:
+        """
+        Config class for the AdModel class.
+        defines the schema/format for the entries in this cluster
+        along with the configurations for the accepted values for the
+        fields.
+        """
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
@@ -29,12 +40,22 @@ class AdModel(BaseModel):
 
 
 class UpdateAdModel(BaseModel):
+    """
+    UpdatedAdModel class to provide with the object that will
+    be used to patch the entries for the ad cluster.
+    """
     company_id: Optional[str]
     product_id: Optional[str]
     type: Optional[str]
     is_active: Optional[bool]
 
     class Config:
+        """
+        Config class for the UpdateAdModel class. Will provide
+        configurations and schema format for the data used in the
+        query to patch a particular entry using the UpdateAdModel
+        class object.
+        """
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
         schema_extra = {
