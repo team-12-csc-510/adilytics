@@ -1,6 +1,8 @@
 """
-This locust script will create products. The product_ids will be included in the ads.
-Run a single thread for this locust script as the number of products to be created and posted are defined in a loop in the script.
+This locust script will create products.
+The product_ids will be included in the ads.
+Run a single thread for this locust script as the number of products
+to be created and posted are defined in a loop in the script.
 """
 import json
 from random import uniform
@@ -26,6 +28,6 @@ class QuickstartUser(HttpUser):
         ]
         for i in range(len(all_products)):
             params = {"name": all_products[i], "cost": product_cost[i]}
-            product = self.client.post("/product/", data=json.dumps(params))
+            self.client.post("/product/", data=json.dumps(params))
 
         raise StopUser

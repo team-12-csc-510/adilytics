@@ -3,7 +3,7 @@ This locust script will create ads that will be displayed to users.
 Number of threads = number of ads to be created
 """
 import json
-from random import randint, randrange, uniform
+from random import randint, randrange
 
 from locust import HttpUser, task
 from locust.exception import StopUser

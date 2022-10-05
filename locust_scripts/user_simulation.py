@@ -10,7 +10,7 @@ import json
 from datetime import datetime
 from random import choices, randint, randrange
 
-from locust import HttpUser, between, task
+from locust import HttpUser, task
 from locust.exception import StopUser
 from random_username.generate import generate_username
 
@@ -20,7 +20,8 @@ class QuickstartUser(HttpUser):
 
         self.all_locations = self.client.get("/locations/")
 
-        # all locations in a list of dictionary object; each list element contains keys: "_id", "city", "state"
+        # all locations in a list of dictionary object;
+        # each list element contains keys: "_id", "city", "state"
         self.all_locations = json.loads(self.all_locations.content)
         # #print(self.all_locations[0])
 
@@ -38,20 +39,17 @@ class QuickstartUser(HttpUser):
             all_locations_ind = randrange(0, len(self.all_locations))
             # select location id
             rand_location_id = self.all_locations[all_locations_ind]["_id"]
-            #print("The location selected:", self.all_locations[all_locations_ind])
-            
+            # print("The location selected:", self.all_locations[all_locations_ind])
+
             # Create and assign a random age.
             age = randrange(15, 80)
 
-            # session_id which counts the number of sessions will be 1 for a newly created user
-            session_id = 1
-
             username = generate_username(1)[0]
             email = username + "@gmail.com"
-            
+
             created_at = datetime(
                 year=datetime.now().year,
-                month=randint(max(1 ,datetime.now().month - 6), datetime.now().month),
+                month=randint(max(1, datetime.now().month - 6), datetime.now().month),
                 day=randint(1, 28),
                 hour=randint(0, 23),
                 minute=randint(0, 59),
@@ -70,38 +68,42 @@ class QuickstartUser(HttpUser):
                 "age": age,
                 "session": 1,
                 "created_at": created_at,
-                "updated_at": created_at
+                "updated_at": created_at,
             }
-            #print("user post params:", params)
+            # print("user post params:", params)
 
-            curr_user = self.client.post("/user/", data=json.dumps(params, default= str))
-            #print("New user created: ", curr_user.content)
+            curr_user = self.client.post("/user/", data=json.dumps(params, default=str))
+            # print("New user created: ", curr_user.content)
             current_user = json.loads(curr_user.content.decode("utf-8"))
             # #print("current user:", curr_user)
         else:
             # Call an existing user
             all_users = self.client.get("/user/")
-            # all_users contain list of dictionaries where each list element contains dictionary with elements '_id', 'city', 'state'
+            # all_users contain list of dictionaries where each
+            # list element contains dictionary with elements '_id', 'city', 'state'
             all_users = json.loads(all_users.content.decode("utf-8"))
-            
+
             if not len(all_users):
                 return
-            
+
             # ##print(all_users)
             # get a random user from all_users list
             rand_user_ind = randrange(0, len(all_users))
             rand_user_id = all_users[rand_user_ind]["_id"]
 
-            # Get the specific user whose id is fetched above. Here the session id can be updated or another API call can be made to so.
+            # Get the specific user whose id is fetched above.
+            # Here the session id can be updated or another API call can be made to so.
             chosen_user = self.client.get("/user/" + rand_user_id).content
             current_user = json.loads(chosen_user.decode("utf-8"))
-            
+
             # Update the session count of the chosen user
             new_session = current_user["session"] + 1
-            self.client.patch("/user/" + str(current_user["_id"]), json={"session": new_session})
+            self.client.patch(
+                "/user/" + str(current_user["_id"]), json={"session": new_session}
+            )
 
-        #print("current_user:", current_user)
-        
+        # print("current_user:", current_user)
+
         all_ads = self.client.get("/ad/")
         all_ads = json.loads(all_ads.content.decode("utf-8"))
         display_active_ads = []
@@ -109,7 +111,7 @@ class QuickstartUser(HttpUser):
         # Select 5 active ads which would be displayed to the user.
         while active_ad_cnt < 5:
             rand_ad_ind = randrange(0, len(all_ads))
-            if all_ads[rand_ad_ind]["is_active"] == True:
+            if all_ads[rand_ad_ind]["is_active"]:
                 display_active_ads.append(all_ads[rand_ad_ind])
                 active_ad_cnt += 1
 
@@ -147,7 +149,7 @@ class QuickstartUser(HttpUser):
             user_id = str(current_user["_id"])
             created_at = datetime(
                 year=datetime.now().year,
-                month=randint(max(1 ,datetime.now().month - 6), datetime.now().month),
+                month=randint(max(1, datetime.now().month - 6), datetime.now().month),
                 day=randint(1, 28),
                 hour=randint(0, 23),
                 minute=randint(0, 59),
@@ -184,11 +186,4 @@ class QuickstartUser(HttpUser):
                 self.client.patch(
                     "/click/" + str(created_click["_id"]), json={"is_converted": True}
                 )
-
-                #print(
-                    "After patching:",
-                    self.client.get("/click/" + str(created_click["_id"])).content,
-                )
-
-        # #print("Success")
         raise StopUser
