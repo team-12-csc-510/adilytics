@@ -21,11 +21,10 @@ async def create_obj():
     sales_data = []
     for i in range(1, 7):
         sales_data.append(
-            format(
+            int(
                 await get_conversions_time_range(
                     get_start_month_date(i), get_end_month_date(i)
-                ),
-                ".2f",
+                )
             )
         )
     sales_data.reverse()

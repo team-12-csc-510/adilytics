@@ -955,7 +955,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <p class="text-center">
-                      {{data}}
+<!--                      {{data}}-->
+                      Sales Data
                     </p>
 
                     <div class="chart">
@@ -967,7 +968,7 @@
                   <!-- /.col -->
                   <div class="col-md-6">
                     <p class="text-center">
-                      <strong>Chart2</strong>
+                      <strong>Visitors Data</strong>
                     </p>
 
                     <div class="progress-group">
@@ -1702,6 +1703,14 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ url_for('static', path='dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+{% block scripts %}
+<script type="text/javascript">
+window.appConfig = {
+    sales_data: '{{ sales | tojson | safe }}'
+}
+</script>
 <script src="{{ url_for('static', path='dist/js/pages/dashboard2.js') }}"></script>
+{% endblock %}
+
 </body>
 </html>
