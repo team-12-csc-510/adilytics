@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from typing import Dict
 
 from fastapi.encoders import jsonable_encoder
@@ -75,4 +76,27 @@ async def list_all_clicks(limit: int = 1000):
                 allclk[inst.get("ad_id")] += 1
         else:
             allclk[inst.get("ad_id")] = 0
+    return allclk
+
+
+async def get_total_clicks():
+    # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
+    click_count = 0
+    async for click in click_db.collection.find():
+        click_count += 1
+    return click_count
+
+
+async def list_all_clicks_and_converted(limit: int = 1000):
+    # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
+    today = datetime.today()
+    days_back = today - timedelta(days=30)
+    allclk: Dict = dict()
+    async for click in click_db.collection.find(
+        {"is_converted": True, "created_at": {"$gte": str(days_back)}}
+    ):
+        if allclk.get(click.get("ad_id")) is None:
+            allclk[click.get("ad_id")] = 1
+        else:
+            allclk[click.get("ad_id")] += 1
     return allclk

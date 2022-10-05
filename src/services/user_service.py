@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from typing import Dict
 
 from fastapi.encoders import jsonable_encoder
@@ -53,3 +54,22 @@ async def delete_user(id: str):
     if delete_result.deleted_count == 1:
         return True
     return False
+
+
+async def get_total_sessions():
+    # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
+    session_count = 0
+    async for user in user_db.collection.find():
+        if "session" in user.keys():
+            session_count += user["session"]
+    return session_count
+
+
+async def get_new_users():
+    # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
+    user_count = 0
+    today = datetime.today()
+    days_back = today - timedelta(days=30)
+    async for user in user_db.collection.find({"created_at": {"$gte": str(days_back)}}):
+        user_count += 1
+    return user_count
