@@ -1,5 +1,5 @@
 import calendar
-from datetime import date, datetime, timedelta
+from datetime import date, datetime
 
 import pytz  # type:ignore
 

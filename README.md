@@ -4,6 +4,7 @@
 [![PyPI - License](https://img.shields.io/pypi/l/FastAPI)](https://opensource.org/licenses/MIT)
 [![codecov](https://codecov.io/gh/team-12-csc-510/adilytics/branch/main/graph/badge.svg?token=TKKWAHLJIO)](https://codecov.io/gh/team-12-csc-510/adilytics)
 [![DOI](https://zenodo.org/badge/540565328.svg)](https://zenodo.org/badge/latestdoi/540565328)
+
 # Project 1: Perform the advertisement analytics on a platform and visualise the results.
 
 Team 12's submission for Project 1 for CSC-510.

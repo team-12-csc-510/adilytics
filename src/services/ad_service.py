@@ -17,6 +17,11 @@ ad_db.collection = Collections.ad.name
 
 
 async def create_ad(ad: AdModel):
+    """Function to add a new ad to the ad collection
+
+    :param ad: AdModel object containing the required tuple details
+    :return: the inserted tuple
+    """
     ad = jsonable_encoder(ad)
     new_ad = await ad_db.collection.insert_one(ad)
     created_ad = await ad_db.collection.find_one({"_id": new_ad.inserted_id})
@@ -24,6 +29,12 @@ async def create_ad(ad: AdModel):
 
 
 async def list_ads(limit: int = 1000):
+    """Function to list all the ads in the collection
+
+    :param limit: maximum number to entries to be fetched,
+    defaults to 1000
+    :return: all the ads
+    """
     # TODO: remove to_list & add skip and list
     # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
     ads = await ad_db.collection.find().to_list(limit)
@@ -31,11 +42,24 @@ async def list_ads(limit: int = 1000):
 
 
 async def get_ad(id: str):
+    """Function to get a particular ad from the collection
+
+    :param id: id of the ad to be retrieved.
+    :type id: str
+    :return: the requested ad
+    """
     if (ad := await ad_db.collection.find_one({"_id": id})) is not None:
         return ad
 
 
 async def update_ad(id: str, ad: UpdateAdModel):
+    """Function to update a particular entry
+
+    :param id: id of the entry to be updated
+    :type id: str
+    :param ad: UpdateAdModel object with the updated details
+    :return: the updated details
+    """
     ad_dict: Dict[str, str] = {k: v for k, v in ad.dict().items() if v is not None}
 
     if len(ad_dict) >= 1:
@@ -52,6 +76,12 @@ async def update_ad(id: str, ad: UpdateAdModel):
 
 
 async def delete_ad(id: str):
+    """Function to delete a particular entry
+
+    :param id: id of the entry to be deleted
+    :type id: str
+    :return: the deleted details
+    """
     delete_result = await ad_db.collection.delete_one({"_id": id})
     if delete_result.deleted_count == 1:
         return True
@@ -59,6 +89,10 @@ async def delete_ad(id: str):
 
 
 async def get_conversions():
+    """Function to get how many of the clicked were converted
+
+    :return: total conversions
+    """
     # Get all clicks to last 30 days
     converted_ads = await list_all_clicks_and_converted()
     total_conversions = 0
