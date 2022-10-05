@@ -7,6 +7,7 @@ from .routes import (
     company_route,
     health_route,
     location_route,
+    product_route,
     user_route,
 )
 
@@ -21,4 +22,5 @@ router.include_router(company_route.router)
 router.include_router(location_route.router)
 router.include_router(ad_route.router)
 router.include_router(click_route.router)
+router.include_router(product_route.router)
 app.include_router(router)
