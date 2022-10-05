@@ -62,6 +62,9 @@ jobs:
 
       - name: Upload coverage to Codecov
         run: |
+          if [ "$CODECOV_TOKEN" == "" ]
+          then
+            echo "No CODECOV_TOKEN"
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
           ./codecov -t ${CODECOV_TOKEN}
