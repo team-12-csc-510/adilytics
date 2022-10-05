@@ -61,9 +61,6 @@ async def get_conversions():
     total_conversions = 0
     for ad in converted_ads:
         ad_detail = await get_ad(ad)
-        product_detail = await get_product(ad_detail.product_id)
-        total_conversions+=product_detail.cost*converted_ads[ad]
+        product_detail = await get_product(ad_detail['product_id'])
+        total_conversions += product_detail['cost'] * converted_ads[ad]
     return total_conversions
-
-
-
