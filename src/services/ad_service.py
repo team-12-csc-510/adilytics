@@ -78,3 +78,14 @@ async def get_conversions_time_range(start_time, end_time):
         product_detail = await get_product(ad_detail["product_id"])
         total_conversions += product_detail["cost"] * converted_ads[ad]
     return total_conversions
+
+
+async def get_conversions_by_ad_type(ad_type):
+    converted_ads = await list_all_clicks_and_converted()
+    total_conversions = 0
+    for ad in converted_ads:
+        ad_detail = await get_ad(ad)
+        if ad_type.value == ad_detail["type"]:
+            product_detail = await get_product(ad_detail["product_id"])
+            total_conversions += product_detail["cost"] * converted_ads[ad]
+    return total_conversions

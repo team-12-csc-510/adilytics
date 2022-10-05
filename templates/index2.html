@@ -1492,12 +1492,12 @@
                   <!-- /.col -->
                   <div class="col-md-4">
                     <ul class="chart-legend clearfix">
-                      <li><i class="far fa-circle text-danger"></i> Chrome</li>
-                      <li><i class="far fa-circle text-success"></i> IE</li>
-                      <li><i class="far fa-circle text-warning"></i> FireFox</li>
-                      <li><i class="far fa-circle text-info"></i> Safari</li>
-                      <li><i class="far fa-circle text-primary"></i> Opera</li>
-                      <li><i class="far fa-circle text-secondary"></i> Navigator</li>
+                      <li><i class="far fa-circle text-danger"></i> Small Ad</li>
+                      <li><i class="far fa-circle text-success"></i> Medium Ad</li>
+                      <li><i class="far fa-circle text-warning"></i> Large Ads </li>
+                      <li><i class="far fa-circle text-info"></i> Video</li>
+                      <br>
+                      <br>
                     </ul>
                   </div>
                   <!-- /.col -->
@@ -1706,7 +1706,9 @@
 {% block scripts %}
 <script type="text/javascript">
 window.appConfig = {
-    sales_data: '{{ sales | tojson | safe }}'
+    sales_data: '{{ sales | tojson | safe }}',
+    ads :'{{ ads | tojson | safe }}',
+    revenue :'{{ revenue | tojson | safe }}'
 }
 </script>
 <script src="{{ url_for('static', path='dist/js/pages/dashboard2.js') }}"></script>
