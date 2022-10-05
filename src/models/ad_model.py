@@ -8,6 +8,10 @@ from src.utils.ad_const import AdType
 
 
 class AdModel(BaseModel):
+    """Class to define the AdModel object for defining the schema for the
+    entries in the ad collection.
+    """
+
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     company_id: str = Field(...)
     product_id: str = Field(...)
@@ -15,6 +19,10 @@ class AdModel(BaseModel):
     is_active: bool = Field(...)
 
     class Config:
+        """Config class for the AdModel class to define the schema example
+        and also define the schema configuration.
+        """
+
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
@@ -29,12 +37,20 @@ class AdModel(BaseModel):
 
 
 class UpdateAdModel(BaseModel):
+    """Class to define the UpdateAdModel to create an object to update
+    existing entry in the ad collection.
+    """
+
     company_id: Optional[str]
     product_id: Optional[str]
     type: Optional[str]
     is_active: Optional[bool]
 
     class Config:
+        """Config class to define the schema to update a particular entry in
+        the ad collection.
+        """
+
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
         schema_extra = {
