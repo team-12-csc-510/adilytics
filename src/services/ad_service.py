@@ -4,7 +4,7 @@ from fastapi.encoders import jsonable_encoder
 
 from src.database.init_db import Database
 from src.models.ad_model import AdModel, UpdateAdModel
-from src.services.click_service import list_all_clicks_and_converted
+from src.services.click_service import list_all_clicks_and_converted, list_all_clicks_and_converted_time_range
 from src.services.product_service import get_product
 from src.utils.database_const import Collections, Databases
 
@@ -58,6 +58,17 @@ async def delete_ad(id: str):
 async def get_conversions():
     # Get all clicks to last 30 days
     converted_ads = await list_all_clicks_and_converted()
+    total_conversions = 0
+    for ad in converted_ads:
+        ad_detail = await get_ad(ad)
+        product_detail = await get_product(ad_detail["product_id"])
+        total_conversions += product_detail["cost"] * converted_ads[ad]
+    return total_conversions
+
+
+async def get_conversions_time_range(start_time, end_time):
+    # Get all clicks to last 30 days
+    converted_ads = await list_all_clicks_and_converted_time_range(start_time, end_time)
     total_conversions = 0
     for ad in converted_ads:
         ad_detail = await get_ad(ad)

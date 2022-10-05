@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta
+import calendar
+from datetime import datetime, timedelta, date
 
 import pytz  # type:ignore
 
@@ -22,3 +23,16 @@ def timediff30(diff: timedelta) -> bool:
         return True
     else:
         return False
+
+
+def get_start_month_date(months: int) -> datetime:
+    currentDate = datetime.today()
+    firstDayOfMonth = date(currentDate.year, currentDate.month - months, 1)
+    return firstDayOfMonth
+
+
+def get_end_month_date(months: int) -> datetime:
+    currentDate = datetime.today()
+    lastDayOfMonth = date(currentDate.year, currentDate.month - months,
+                          calendar.monthrange(currentDate.year, currentDate.month- months)[1])
+    return lastDayOfMonth
