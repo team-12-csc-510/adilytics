@@ -4,7 +4,10 @@ from fastapi.encoders import jsonable_encoder
 
 from src.database.init_db import Database
 from src.models.ad_model import AdModel, UpdateAdModel
-from src.services.click_service import list_all_clicks_and_converted, list_all_clicks_and_converted_time_range
+from src.services.click_service import (
+    list_all_clicks_and_converted,
+    list_all_clicks_and_converted_time_range,
+)
 from src.services.product_service import get_product
 from src.utils.database_const import Collections, Databases
 

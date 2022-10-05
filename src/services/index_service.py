@@ -1,5 +1,5 @@
 from src.services.ad_service import get_conversions, get_conversions_time_range
-from src.services.click_service import get_total_clicks, get_click_data_time_range
+from src.services.click_service import get_click_data_time_range, get_total_clicks
 from src.services.user_service import get_new_users, get_total_sessions
 from src.utils.time_utils import get_end_month_date, get_start_month_date
 
@@ -21,7 +21,13 @@ async def create_obj():
     sales_data = []
     for i in range(1, 7):
         sales_data.append(
-            format(await get_conversions_time_range(get_start_month_date(i), get_end_month_date(i)), ".2f"))
+            format(
+                await get_conversions_time_range(
+                    get_start_month_date(i), get_end_month_date(i)
+                ),
+                ".2f",
+            )
+        )
     sales_data.reverse()
     data["sales"] = sales_data
 
@@ -29,7 +35,9 @@ async def create_obj():
     # get_click_data_time_range
     normalization = round(1 / float(bounce_rate) * 100)
     for i in range(1, 7):
-        visitors = await get_click_data_time_range(get_start_month_date(i), get_end_month_date(i))
+        visitors = await get_click_data_time_range(
+            get_start_month_date(i), get_end_month_date(i)
+        )
         visitors = int(visitors) * normalization
         visitor_data.append(visitors)
     visitor_data.reverse()

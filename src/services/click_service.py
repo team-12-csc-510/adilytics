@@ -101,13 +101,15 @@ async def list_all_clicks_and_converted(limit: int = 1000):
             allclk[click.get("ad_id")] += 1
     return allclk
 
-async def list_all_clicks_and_converted_time_range(startDate,endDate):
+
+async def list_all_clicks_and_converted_time_range(startDate, endDate):
     # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
-    today = datetime.today()
-    days_back = today - timedelta(days=30)
     allclk: Dict = dict()
     async for click in click_db.collection.find(
-        {"is_converted": True, "created_at": {"$gte": str(startDate),"$lt": str(endDate)}}
+        {
+            "is_converted": True,
+            "created_at": {"$gte": str(startDate), "$lt": str(endDate)},
+        }
     ):
         if allclk.get(click.get("ad_id")) is None:
             allclk[click.get("ad_id")] = 1
@@ -115,11 +117,15 @@ async def list_all_clicks_and_converted_time_range(startDate,endDate):
             allclk[click.get("ad_id")] += 1
     return allclk
 
-async def get_click_data_time_range(start_time,end_time):
+
+async def get_click_data_time_range(start_time, end_time):
     # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
     clicks = 0
     async for click in click_db.collection.find(
-        {"is_converted": True, "created_at": {"$gte": str(start_time),"$lt": str(end_time)}}
+        {
+            "is_converted": True,
+            "created_at": {"$gte": str(start_time), "$lt": str(end_time)},
+        }
     ):
-        clicks+=1
+        clicks += 1
     return clicks
