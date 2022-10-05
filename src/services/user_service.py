@@ -63,10 +63,13 @@ async def get_total_sessions():
         session_count += user.session
     return session_count
 
+
 async def get_new_users():
     # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
-    user_count=0
+    user_count = 0
+    today = datetime.today()
+    days_back = today - timedelta(days=30)
     async for user in user_db.collection.find(
-        {'created_at': {'$lt': datetime.now(), '$gt': datetime.now() - timedelta(days=3000)}}):
+            {'created_at': {'$gte': str(days_back)}}):
         user_count += 1
     return user_count

@@ -57,12 +57,11 @@ async def delete_ad(id: str):
 
 async def get_conversions():
     # Get all clicks to last 30 days
-    # TODO: Test this after correcting db values.
-    converted_ads = await list_all_clicks_and_converted(100000000)
+    converted_ads = await list_all_clicks_and_converted()
     total_conversions = 0
     for ad in converted_ads:
-        ad_detail = get_ad(ad)
-        product_detail = get_product(ad_detail.product_id)
+        ad_detail = await get_ad(ad)
+        product_detail = await get_product(ad_detail.product_id)
         total_conversions+=product_detail.cost*converted_ads[ad]
     return total_conversions
 
