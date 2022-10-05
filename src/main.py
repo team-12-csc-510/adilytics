@@ -13,9 +13,12 @@ from .routes import (
     user_route,
 )
 
+# Initialize App
 app = FastAPI()
+# Load App settings
 settings = config.Settings()
 
+# Initialize Routes
 router = APIRouter()
 app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 router.include_router(health_route.router)

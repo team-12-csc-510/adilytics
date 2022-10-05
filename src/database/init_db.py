@@ -9,6 +9,10 @@ client = AsyncIOMotorClient(os.environ["MONGODB_URL"])
 
 
 class Database:
+    """
+    Database initializer class, uses motor's AsyncIO client
+    """
+
     def __int__(self):
         self._database = None
         self._collection = None
