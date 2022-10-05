@@ -18,19 +18,20 @@ async def create_obj():
     data["total_conversion"] = format(await get_conversions(), ".2f")
     # new users
     data["total_new_users"] = await get_new_users()
-    sales_data=[]
-    for i in range(1,7):
-        sales_data.append(format(await get_conversions_time_range(get_start_month_date(i),get_end_month_date(i)),".2f"))
+    sales_data = []
+    for i in range(1, 7):
+        sales_data.append(
+            format(await get_conversions_time_range(get_start_month_date(i), get_end_month_date(i)), ".2f"))
     sales_data.reverse()
-    data["sales"]=sales_data
+    data["sales"] = sales_data
 
-    visitor_data=[]
+    visitor_data = []
     # get_click_data_time_range
-    normalization= round(1/float(bounce_rate)*100)
-    for i in range(1,7):
-        visitors = await get_click_data_time_range(get_start_month_date(i),get_end_month_date(i))
-        visitors= int(visitors)*normalization
+    normalization = round(1 / float(bounce_rate) * 100)
+    for i in range(1, 7):
+        visitors = await get_click_data_time_range(get_start_month_date(i), get_end_month_date(i))
+        visitors = int(visitors) * normalization
         visitor_data.append(visitors)
     visitor_data.reverse()
-    data["visitors"]=visitor_data
+    data["visitors"] = visitor_data
     return data
