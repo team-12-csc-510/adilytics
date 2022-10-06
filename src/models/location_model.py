@@ -16,6 +16,8 @@ class LocationModel(BaseModel):
 
     city: str = Field(...)
     state: str = Field(...)
+    lat: float = Field(...)
+    lon: float = Field(...)
 
     class Config:
         """
@@ -27,7 +29,14 @@ class LocationModel(BaseModel):
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
 
-        schema_extra = {"example": {"city": "Raleigh", "state": "North Carolina"}}
+        schema_extra = {
+            "example": {
+                "city": "Raleigh",
+                "state": "North Carolina",
+                "lat": 1.555,
+                "lon": 1.666,
+            }
+        }
 
 
 class UpdateLocationModel(BaseModel):
@@ -38,6 +47,8 @@ class UpdateLocationModel(BaseModel):
 
     city: Optional[str]
     state: Optional[str]
+    lat: Optional[float]
+    lon: Optional[float]
 
     class Config:
         """
@@ -47,4 +58,8 @@ class UpdateLocationModel(BaseModel):
 
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
-        schema_extra = {"example": {"city": "Raleigh", "state": "North Carolina"}}
+        schema_extra = {
+            "example": {"city": "Raleigh", "state": "North Carolina"},
+            "lat": 1.555,
+            "lon": 1.666,
+        }
