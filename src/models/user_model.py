@@ -10,8 +10,7 @@ from src.utils import time_utils
 
 class UserModel(BaseModel):
     """
-    Class to define the UserModel object for defining the schema for the
-    entries in the User collection.
+    Model class for user. Defines the user collection.
     """
 
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
@@ -24,11 +23,6 @@ class UserModel(BaseModel):
     updated_at: datetime = time_utils.now()
 
     class Config:
-        """
-        Config class for the UserModel class to define the schema example
-        and also define the schema configuration.
-        """
-
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
@@ -47,8 +41,8 @@ class UserModel(BaseModel):
 
 class UpdateUserModel(BaseModel):
     """
-    Class to define the UpdateUserModel to create an object to update
-    existing entry in the User collection.
+    Config class for the UpdateUser class to define the schema example
+    and also define the schema configuration.
     """
 
     name: Optional[str]
@@ -58,11 +52,6 @@ class UpdateUserModel(BaseModel):
     session: Optional[int]
 
     class Config:
-        """
-        Config class to define the schema to update a particular entry in
-        the User collection.
-        """
-
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
         schema_extra = {
