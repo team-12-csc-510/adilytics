@@ -22,7 +22,6 @@ async def get_index(request: Request):
             "ads": (val["ads"]),
             "revenue": json.dumps(val["revenue"]),
             "visitors": json.dumps(val["visitors"]),
-            "locations": (val["location_data"])
-
+            "locations": (val["location_data"]),
         },
     )

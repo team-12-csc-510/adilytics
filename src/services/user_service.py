@@ -6,7 +6,6 @@ from fastapi.encoders import jsonable_encoder
 
 from src.database.init_db import Database
 from src.models.user_model import UpdateUserModel, UserModel
-from src.services.location_service import get_location
 from src.utils.database_const import Collections, Databases
 
 user_db = Database()
@@ -43,7 +42,7 @@ async def update_user(id: str, user: UpdateUserModel):
 
         if update_result.modified_count == 1:
             if (
-                    updated_user := await user_db.collection.find_one({"_id": id})
+                updated_user := await user_db.collection.find_one({"_id": id})
             ) is not None:
                 return updated_user
 
@@ -78,20 +77,23 @@ async def get_new_users():
 
 
 async def get_user_info_with_location():
-    # create a dictionary containing a users at a location, location name, longitude , latitude
     data = {}
     async for user in user_db.collection.find():
         # location_detail = await get_location(user['location_id'])
-        if user['location_id'] not in data:
-            data[user['location_id']] = {}
-            data[user['location_id']]["value"] = 1
-            data[user['location_id']]["longitude"] = -78.644257 + randint(1, 10)
-            data[user['location_id']]["latitude"]= 35.787743 + randint(1, 10)
-            data[user['location_id']]["tooltip"] = {}
-            data[user['location_id']]["tooltip"]["content"] = "Hmm {}".format(data[user['location_id']]["value"])
+        if user["location_id"] not in data:
+            data[user["location_id"]] = {}
+            data[user["location_id"]]["value"] = 1
+            data[user["location_id"]]["longitude"] = -78.644257 + randint(1, 10)
+            data[user["location_id"]]["latitude"] = 35.787743 + randint(1, 10)
+            data[user["location_id"]]["tooltip"] = {}
+            data[user["location_id"]]["tooltip"]["content"] = "Hmm {}".format(
+                data[user["location_id"]]["value"]
+            )
             # < span
             # style =\"font-weight:bold;\">{}</span><br />'.format('abc')
         else:
-            data[user['location_id']]["value"] = data[user['location_id']]["value"] + 1
-            data[user['location_id']]["tooltip"]["content"] = "Hmm".format(data[user['location_id']]["value"])
+            data[user["location_id"]]["value"] = data[user["location_id"]]["value"] + 1
+            data[user["location_id"]]["tooltip"]["content"] = "Hmm {}".format(
+                data[user["location_id"]]["value"]
+            )
     return data

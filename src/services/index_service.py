@@ -1,14 +1,23 @@
+import random
+
 from src.services.ad_service import (
     get_conversions,
     get_conversions_by_ad_type,
     get_conversions_time_range,
 )
-from src.services.click_service import get_click_data_time_range, get_total_clicks, list_all_clicks
-from src.services.user_service import get_new_users, get_total_sessions, get_user_info_with_location
+from src.services.click_service import (
+    get_click_data_time_range,
+    get_total_clicks,
+    list_all_clicks,
+)
+from src.services.user_service import (
+    get_new_users,
+    get_total_sessions,
+    get_user_info_with_location,
+)
 from src.utils.ad_const import AdType
 from src.utils.time_utils import get_end_month_date, get_start_month_date
 
-import random
 
 async def create_obj():
     # click count in last month
@@ -55,5 +64,5 @@ async def create_obj():
     data["ads"] = ad_index
     data["revenue"] = revenue_by_add
     # create location obj
-    data["location_data"]= await get_user_info_with_location()
+    data["location_data"] = await get_user_info_with_location()
     return data
