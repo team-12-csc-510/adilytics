@@ -13,6 +13,12 @@ click_db.collection = Collections.click.name
 
 
 async def create_click(click: ClickModel):
+    """
+    Function to add a new ad to the click collection
+
+    :param ad: ClickModel object containing the required tuple details
+    :return: the inserted tuple
+    """
     click = jsonable_encoder(click)
     new_click = await click_db.collection.insert_one(click)
     created_new_click = await click_db.collection.find_one(
@@ -22,6 +28,13 @@ async def create_click(click: ClickModel):
 
 
 async def list_clicks(limit: int = 1000):
+    """
+    Function to list all the clicks in the collection
+
+    :param limit: maximum number to entries to be fetched,
+    defaults to 1000
+    :return: all the clicks
+    """
     # TODO: remove to_list & add skip and list
     # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
     clicks = await click_db.collection.find().to_list(limit)
@@ -29,11 +42,26 @@ async def list_clicks(limit: int = 1000):
 
 
 async def get_click(id: str):
+    """
+    Function to get a particular click from the collection
+
+    :param id: id of the click to be retrieved.
+    :type id: str
+    :return: the requested click
+    """
     if (click := await click_db.collection.find_one({"_id": id})) is not None:
         return click
 
 
 async def update_click(id: str, click: UpdateClickModel):
+    """
+    Function to update a particular entry
+
+    :param id: id of the entry to be updated
+    :type id: str
+    :param ad: UpdateClickModel object with the updated details
+    :return: the updated details
+    """
     click_dict: Dict[str, str] = {
         k: v for k, v in click.dict().items() if v is not None
     }
@@ -54,6 +82,14 @@ async def update_click(id: str, click: UpdateClickModel):
 
 
 async def delete_click(id: str):
+    """
+    Function to delete a particular entry
+
+    :param id: id of the entry to be deleted
+    :type id: str
+    :return: the deleted details
+    """
+
     delete_result = await click_db.collection.delete_one({"_id": id})
     if delete_result.deleted_count == 1:
         return True
@@ -61,6 +97,11 @@ async def delete_click(id: str):
 
 
 async def list_all_clicks(limit: int = 1000):
+    """
+    Function to get user click count in past 30 days
+    :param limit:
+    :return: Total number of clicks
+    """
     # TODO: remove to_list & add skip and list
     # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
     user_count = 0
@@ -74,6 +115,10 @@ async def list_all_clicks(limit: int = 1000):
 
 
 async def get_total_clicks():
+    """
+    Function to get total click counts in the Click collection
+    :return: Total clicks
+    """
     # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
     click_count = 0
     async for click in click_db.collection.find():
@@ -82,6 +127,11 @@ async def get_total_clicks():
 
 
 async def list_all_clicks_and_converted(limit: int = 1000):
+    """
+    Function to get all the converted clicks
+    :param limit:
+    :return: Count of converted clicks
+    """
     # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
     today = datetime.today()
     days_back = today - timedelta(days=30)
