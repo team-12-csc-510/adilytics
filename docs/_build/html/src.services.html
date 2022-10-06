@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.services package &mdash; Adilityics v1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="src.utils package" href="src.utils.html" />
+    <link rel="prev" title="src.routes package" href="src.routes.html" />
+</head>
+
+<body class="wy-body-for-nav">
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Adilityics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="src.models.html">src.models package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.routes.html">src.routes package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">src.services package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.services.ad_service">src.services.ad_service module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.ad_service.create_ad"><code class="docutils literal notranslate"><span class="pre">create_ad()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.ad_service.delete_ad"><code class="docutils literal notranslate"><span class="pre">delete_ad()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.ad_service.get_ad"><code class="docutils literal notranslate"><span class="pre">get_ad()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.ad_service.get_conversions"><code class="docutils literal notranslate"><span class="pre">get_conversions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.ad_service.list_ads"><code class="docutils literal notranslate"><span class="pre">list_ads()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.ad_service.update_ad"><code class="docutils literal notranslate"><span class="pre">update_ad()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.services.click_service">src.services.click_service module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.click_service.create_click"><code class="docutils literal notranslate"><span class="pre">create_click()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.click_service.delete_click"><code class="docutils literal notranslate"><span class="pre">delete_click()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.click_service.get_click"><code class="docutils literal notranslate"><span class="pre">get_click()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.click_service.get_total_clicks"><code class="docutils literal notranslate"><span class="pre">get_total_clicks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.click_service.list_all_clicks"><code class="docutils literal notranslate"><span class="pre">list_all_clicks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.click_service.list_all_clicks_and_converted"><code class="docutils literal notranslate"><span class="pre">list_all_clicks_and_converted()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.click_service.list_clicks"><code class="docutils literal notranslate"><span class="pre">list_clicks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.click_service.update_click"><code class="docutils literal notranslate"><span class="pre">update_click()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.services.company_service">src.services.company_service module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.company_service.create_company"><code class="docutils literal notranslate"><span class="pre">create_company()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.company_service.delete_company"><code class="docutils literal notranslate"><span class="pre">delete_company()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.company_service.get_company"><code class="docutils literal notranslate"><span class="pre">get_company()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.company_service.list_companies"><code class="docutils literal notranslate"><span class="pre">list_companies()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.company_service.update_company"><code class="docutils literal notranslate"><span class="pre">update_company()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.services.health_service">src.services.health_service module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.health_service.system_checks"><code class="docutils literal notranslate"><span class="pre">system_checks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.services.index_service">src.services.index_service module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.index_service.create_obj"><code class="docutils literal notranslate"><span class="pre">create_obj()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.services.location_service">src.services.location_service module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.location_service.create_location"><code class="docutils literal notranslate"><span class="pre">create_location()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.location_service.delete_location"><code class="docutils literal notranslate"><span class="pre">delete_location()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.location_service.get_location"><code class="docutils literal notranslate"><span class="pre">get_location()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.location_service.list_locations"><code class="docutils literal notranslate"><span class="pre">list_locations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.location_service.update_location"><code class="docutils literal notranslate"><span class="pre">update_location()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.services.product_service">src.services.product_service module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.product_service.create_product"><code class="docutils literal notranslate"><span class="pre">create_product()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.product_service.delete_product"><code class="docutils literal notranslate"><span class="pre">delete_product()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.product_service.get_product"><code class="docutils literal notranslate"><span class="pre">get_product()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.product_service.list_products"><code class="docutils literal notranslate"><span class="pre">list_products()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.services.user_service">src.services.user_service module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.user_service.create_user"><code class="docutils literal notranslate"><span class="pre">create_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.user_service.delete_user"><code class="docutils literal notranslate"><span class="pre">delete_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.user_service.get_new_users"><code class="docutils literal notranslate"><span class="pre">get_new_users()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.user_service.get_total_sessions"><code class="docutils literal notranslate"><span class="pre">get_total_sessions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.user_service.get_user"><code class="docutils literal notranslate"><span class="pre">get_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.user_service.list_users"><code class="docutils literal notranslate"><span class="pre">list_users()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.services.user_service.update_user"><code class="docutils literal notranslate"><span class="pre">update_user()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.services">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src.utils.html">src.utils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">tests package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Adilityics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>src.services package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.services.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <section id="src-services-package">
+<h1>src.services package<a class="headerlink" href="#src-services-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-src.services.ad_service">
+<span id="src-services-ad-service-module"></span><h2>src.services.ad_service module<a class="headerlink" href="#module-src.services.ad_service" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.ad_service.create_ad">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.ad_service.</span></span><span class="sig-name descname"><span class="pre">create_ad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.ad_model.AdModel" title="src.models.ad_model.AdModel"><span class="pre">AdModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.ad_service.create_ad" title="Permalink to this definition"></a></dt>
+<dd><p>Function to add a new ad to the ad collection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ad</strong> – AdModel object containing the required tuple details</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the inserted tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.ad_service.delete_ad">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.ad_service.</span></span><span class="sig-name descname"><span class="pre">delete_ad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.ad_service.delete_ad" title="Permalink to this definition"></a></dt>
+<dd><p>Function to delete a particular entry</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – id of the entry to be deleted</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the deleted details</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.ad_service.get_ad">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.ad_service.</span></span><span class="sig-name descname"><span class="pre">get_ad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.ad_service.get_ad" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get a particular ad from the collection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – id of the ad to be retrieved.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the requested ad</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.ad_service.get_conversions">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.ad_service.</span></span><span class="sig-name descname"><span class="pre">get_conversions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.services.ad_service.get_conversions" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get how many of the clicked were converted</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>total conversions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.ad_service.list_ads">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.ad_service.</span></span><span class="sig-name descname"><span class="pre">list_ads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.ad_service.list_ads" title="Permalink to this definition"></a></dt>
+<dd><p>Function to list all the ads in the collection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>limit</strong> – maximum number to entries to be fetched,</p>
+</dd>
+</dl>
+<p>defaults to 1000
+:return: all the ads</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.ad_service.update_ad">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.ad_service.</span></span><span class="sig-name descname"><span class="pre">update_ad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.ad_model.UpdateAdModel" title="src.models.ad_model.UpdateAdModel"><span class="pre">UpdateAdModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.ad_service.update_ad" title="Permalink to this definition"></a></dt>
+<dd><p>Function to update a particular entry</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – id of the entry to be updated</p></li>
+<li><p><strong>ad</strong> – UpdateAdModel object with the updated details</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the updated details</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.services.click_service">
+<span id="src-services-click-service-module"></span><h2>src.services.click_service module<a class="headerlink" href="#module-src.services.click_service" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.click_service.create_click">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.click_service.</span></span><span class="sig-name descname"><span class="pre">create_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">click</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.click_model.ClickModel" title="src.models.click_model.ClickModel"><span class="pre">ClickModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.click_service.create_click" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.click_service.delete_click">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.click_service.</span></span><span class="sig-name descname"><span class="pre">delete_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.click_service.delete_click" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.click_service.get_click">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.click_service.</span></span><span class="sig-name descname"><span class="pre">get_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.click_service.get_click" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.click_service.get_total_clicks">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.click_service.</span></span><span class="sig-name descname"><span class="pre">get_total_clicks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.services.click_service.get_total_clicks" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.click_service.list_all_clicks">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.click_service.</span></span><span class="sig-name descname"><span class="pre">list_all_clicks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.click_service.list_all_clicks" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.click_service.list_all_clicks_and_converted">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.click_service.</span></span><span class="sig-name descname"><span class="pre">list_all_clicks_and_converted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.click_service.list_all_clicks_and_converted" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.click_service.list_clicks">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.click_service.</span></span><span class="sig-name descname"><span class="pre">list_clicks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.click_service.list_clicks" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.click_service.update_click">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.click_service.</span></span><span class="sig-name descname"><span class="pre">update_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">click</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.click_model.UpdateClickModel" title="src.models.click_model.UpdateClickModel"><span class="pre">UpdateClickModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.click_service.update_click" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.services.company_service">
+<span id="src-services-company-service-module"></span><h2>src.services.company_service module<a class="headerlink" href="#module-src.services.company_service" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.company_service.create_company">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.company_service.</span></span><span class="sig-name descname"><span class="pre">create_company</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">company</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.company_model.CompanyModel" title="src.models.company_model.CompanyModel"><span class="pre">CompanyModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.company_service.create_company" title="Permalink to this definition"></a></dt>
+<dd><p>Function to add a new company to the company collection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>company</strong> – CompanyModel object containing the required tuple details</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the inserted tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.company_service.delete_company">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.company_service.</span></span><span class="sig-name descname"><span class="pre">delete_company</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.company_service.delete_company" title="Permalink to this definition"></a></dt>
+<dd><p>Function to delete a particular entry</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – id of the entry to be deleted</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the deleted details</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.company_service.get_company">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.company_service.</span></span><span class="sig-name descname"><span class="pre">get_company</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.company_service.get_company" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get a particular company from the collection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>str</em>) – id of the company to be retrieved.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the requested company</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.company_service.list_companies">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.company_service.</span></span><span class="sig-name descname"><span class="pre">list_companies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.company_service.list_companies" title="Permalink to this definition"></a></dt>
+<dd><p>Function to list all the companies in the collection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>limit</strong> – maximum number to entries to be fetched,</p>
+</dd>
+</dl>
+<p>defaults to 1000
+:return: all the companies</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.company_service.update_company">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.company_service.</span></span><span class="sig-name descname"><span class="pre">update_company</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">company</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.company_model.UpdateCompanyModel" title="src.models.company_model.UpdateCompanyModel"><span class="pre">UpdateCompanyModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.company_service.update_company" title="Permalink to this definition"></a></dt>
+<dd><p>Function to update a particular entry</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>str</em>) – id of the entry to be updated</p></li>
+<li><p><strong>company</strong> – UpdateCompanyModel object with the updated details</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the updated details</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.services.health_service">
+<span id="src-services-health-service-module"></span><h2>src.services.health_service module<a class="headerlink" href="#module-src.services.health_service" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.health_service.system_checks">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.health_service.</span></span><span class="sig-name descname"><span class="pre">system_checks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.health_service.system_checks" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.services.index_service">
+<span id="src-services-index-service-module"></span><h2>src.services.index_service module<a class="headerlink" href="#module-src.services.index_service" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.index_service.create_obj">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.index_service.</span></span><span class="sig-name descname"><span class="pre">create_obj</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.services.index_service.create_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.services.location_service">
+<span id="src-services-location-service-module"></span><h2>src.services.location_service module<a class="headerlink" href="#module-src.services.location_service" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.location_service.create_location">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.location_service.</span></span><span class="sig-name descname"><span class="pre">create_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.location_model.LocationModel" title="src.models.location_model.LocationModel"><span class="pre">LocationModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.location_service.create_location" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.location_service.delete_location">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.location_service.</span></span><span class="sig-name descname"><span class="pre">delete_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.location_service.delete_location" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.location_service.get_location">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.location_service.</span></span><span class="sig-name descname"><span class="pre">get_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.location_service.get_location" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.location_service.list_locations">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.location_service.</span></span><span class="sig-name descname"><span class="pre">list_locations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.location_service.list_locations" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.location_service.update_location">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.location_service.</span></span><span class="sig-name descname"><span class="pre">update_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.location_model.UpdateLocationModel" title="src.models.location_model.UpdateLocationModel"><span class="pre">UpdateLocationModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.location_service.update_location" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.services.product_service">
+<span id="src-services-product-service-module"></span><h2>src.services.product_service module<a class="headerlink" href="#module-src.services.product_service" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.product_service.create_product">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.product_service.</span></span><span class="sig-name descname"><span class="pre">create_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">product</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.product_model.ProductModel" title="src.models.product_model.ProductModel"><span class="pre">ProductModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.product_service.create_product" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.product_service.delete_product">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.product_service.</span></span><span class="sig-name descname"><span class="pre">delete_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.product_service.delete_product" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.product_service.get_product">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.product_service.</span></span><span class="sig-name descname"><span class="pre">get_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.product_service.get_product" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.product_service.list_products">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.product_service.</span></span><span class="sig-name descname"><span class="pre">list_products</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.product_service.list_products" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.services.user_service">
+<span id="src-services-user-service-module"></span><h2>src.services.user_service module<a class="headerlink" href="#module-src.services.user_service" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.user_service.create_user">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.user_service.</span></span><span class="sig-name descname"><span class="pre">create_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.user_model.UserModel" title="src.models.user_model.UserModel"><span class="pre">UserModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.user_service.create_user" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.user_service.delete_user">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.user_service.</span></span><span class="sig-name descname"><span class="pre">delete_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.user_service.delete_user" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.user_service.get_new_users">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.user_service.</span></span><span class="sig-name descname"><span class="pre">get_new_users</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.services.user_service.get_new_users" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.user_service.get_total_sessions">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.user_service.</span></span><span class="sig-name descname"><span class="pre">get_total_sessions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.services.user_service.get_total_sessions" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.user_service.get_user">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.user_service.</span></span><span class="sig-name descname"><span class="pre">get_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.user_service.get_user" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.user_service.list_users">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.user_service.</span></span><span class="sig-name descname"><span class="pre">list_users</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.user_service.list_users" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.user_service.update_user">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.user_service.</span></span><span class="sig-name descname"><span class="pre">update_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="src.models.html#src.models.user_model.UpdateUserModel" title="src.models.user_model.UpdateUserModel"><span class="pre">UpdateUserModel</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.user_service.update_user" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.services">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.services" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="src.routes.html" class="btn btn-neutral float-left" title="src.routes package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="src.utils.html" class="btn btn-neutral float-right" title="src.utils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Aditya Tewari, Naman Bhagat, Ritwik Tiwari, Saksham Thakur, Shubhender Singh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+</body>
+</html>
