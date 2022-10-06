@@ -9,6 +9,11 @@ from src.utils import time_utils
 
 
 class ClickModel(BaseModel):
+    """
+    Class to define the ClickModel object for defining the schema for the
+    entries in the Click collection.
+    """
+
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     ad_id: str = Field(...)
     user_id: str = Field(...)
@@ -17,6 +22,11 @@ class ClickModel(BaseModel):
     updated_at: datetime = time_utils.now()
 
     class Config:
+        """
+        Config class for the ClickModel class to define the schema example
+        and also define the schema configuration.
+        """
+
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
@@ -32,10 +42,20 @@ class ClickModel(BaseModel):
 
 
 class UpdateClickModel(BaseModel):
+    """
+    Class to define the UpdateClickModel to create an object to update
+    existing entry in the Click collection.
+    """
+
     is_converted: Optional[bool]
     updated_at: Optional[datetime]
 
     class Config:
+        """
+        Config class to define the schema to update a particular entry in
+        the Click collection.
+        """
+
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
         schema_extra = {
