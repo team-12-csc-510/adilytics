@@ -1468,7 +1468,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Browser Usage</h3>
+                <h3 class="card-title">Revenue by Ad Type</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -1709,6 +1709,7 @@ window.appConfig = {
     ads :'{{ ads | tojson | safe }}',
     revenue :'{{ revenue | tojson | safe }}',
     visitors :'{{ visitors | tojson | safe }}',
+    locations:'{{ locations | tojson | safe }}'
 }
 </script>
 <script src="{{ url_for('static', path='dist/js/pages/dashboard2.js') }}"></script>
