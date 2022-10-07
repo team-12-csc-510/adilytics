@@ -1,0 +1,19 @@
+cff-version: 1.0.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Tewari"
+  given-names: "Aditya"
+- family-names: "Bhagat"
+  given-names: "Naman"
+- family-names: "Tiwari"
+  given-names: "Ritwik"
+- family-names: "Thakur"
+  given-names: "Saksham"
+- family-names: "Singh"
+  given-names: "Shubhender"
+
+title: "CSC 510- Project 1 (Adilytics)"
+version: 1.0.0
+doi: 10.5281/zenodo.7032659
+date-released: 2022-10-07
+url: "https://github.com/team-12-csc-510/adilytics"
