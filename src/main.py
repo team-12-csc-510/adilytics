@@ -1,3 +1,5 @@
+import os
+
 from fastapi import APIRouter, FastAPI
 from starlette.staticfiles import StaticFiles
 
@@ -15,12 +17,15 @@ from .routes import (
 
 # Initialize App
 app = FastAPI()
+
 # Load App settings
 settings = config.Settings()
+script_dir = os.path.dirname(__file__)
+st_abs_file_path = os.path.join(script_dir, "..", "static/")
 
 # Initialize Routes
 router = APIRouter()
-app.mount("/static", StaticFiles(directory="static", html=True), name="static")
+app.mount("/static", StaticFiles(directory=st_abs_file_path, html=True), name="static")
 router.include_router(health_route.router)
 router.include_router(user_route.router)
 router.include_router(company_route.router)
