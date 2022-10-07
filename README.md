@@ -8,9 +8,11 @@
 [![Issues_Open](https://img.shields.io/github/issues-raw/team-12-csc-510/adilytics)](https://github.com/team-12-csc-510/adilytics/issues?q=is%3Aopen+is%3Aissue)
 [![Issues_Closed](https://img.shields.io/github/issues-closed/team-12-csc-510/adilytics)](https://github.com/team-12-csc-510/adilytics/issues?q=is%3Aissue+is%3Aclosed)
 
-
-
-<img alt="Adylitics Logo" height="auto" src="/media/adylitics_logo.jpeg" width="600"/>
+<p align = center>
+  <a href="">
+    <img src="/media/adylitics_logo.jpeg" alt="Logo" height="400" width="800"/>
+  </a>
+</p>
 
 # Project 1: Perform the advertisement analytics on a platform and visualise the results.
 
