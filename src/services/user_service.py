@@ -5,6 +5,7 @@ from fastapi.encoders import jsonable_encoder
 
 from src.database.init_db import Database
 from src.models.user_model import UpdateUserModel, UserModel
+from src.services.location_service import get_location
 from src.utils.database_const import Collections, Databases
 
 user_db = Database()
@@ -73,3 +74,24 @@ async def get_new_users():
     async for user in user_db.collection.find({"created_at": {"$gte": str(days_back)}}):
         user_count += 1
     return user_count
+
+
+async def get_user_info_with_location():
+    data = {}
+    async for user in user_db.collection.find():
+        location_detail = await get_location(user["location_id"])
+        if user["location_id"] not in data:
+            data[user["location_id"]] = {}
+            data[user["location_id"]]["value"] = 1
+            data[user["location_id"]]["longitude"] = location_detail["lon"]
+            data[user["location_id"]]["latitude"] = location_detail["lat"]
+            data[user["location_id"]]["tooltip"] = {}
+            data[user["location_id"]]["tooltip"]["content"] = "{} {}".format(
+                location_detail["city"], data[user["location_id"]]["value"]
+            )
+        else:
+            data[user["location_id"]]["value"] = data[user["location_id"]]["value"] + 1
+            data[user["location_id"]]["tooltip"]["content"] = "{} {}".format(
+                location_detail["city"], data[user["location_id"]]["value"]
+            )
+    return data
