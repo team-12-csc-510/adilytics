@@ -5,8 +5,8 @@
 ![Made By](https://img.shields.io/badge/Made_By-Python3.9-green)
 [![codecov](https://codecov.io/gh/team-12-csc-510/adilytics/branch/main/graph/badge.svg?token=TKKWAHLJIO)](https://codecov.io/gh/team-12-csc-510/adilytics)
 [![DOI](https://zenodo.org/badge/540565328.svg)](https://zenodo.org/badge/latestdoi/540565328)
-![Issues_Open](https://img.shields.io/github/issues-raw/team-12-csc-510/adilytics)
-![Issues_Closed](https://img.shields.io/github/issues-closed/team-12-csc-510/adilytics)
+[![Issues_Open](https://img.shields.io/github/issues-raw/team-12-csc-510/adilytics)](https://github.com/team-12-csc-510/adilytics/issues?q=is%3Aopen+is%3Aissue)
+[![Issues_Closed](https://img.shields.io/github/issues-closed/team-12-csc-510/adilytics)](https://github.com/team-12-csc-510/adilytics/issues?q=is%3Aissue+is%3Aclosed)
 
 
 
