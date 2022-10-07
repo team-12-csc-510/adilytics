@@ -11,10 +11,13 @@ router = APIRouter(prefix="/locations")
 
 @router.post("/", response_description="Add new location", response_model=LocationModel)
 async def create_location(location: LocationModel = Body(...)):
-    """Function to handle the POST request to add a new location to the location collection
+    """Function to handle the POST request to
+    add a new location to the location collection
 
-    :param location: LocationModel object containing the required tuple details
-    :return: JSON object with the inserted tuple along with an HTTP response
+    :param location: LocationModel object
+    containing the required tuple details
+    :return: JSON object with the inserted
+    tuple along with an HTTP response
     """
     created_location = await location_service.create_location(location)
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_location)
@@ -24,9 +27,11 @@ async def create_location(location: LocationModel = Body(...)):
     "/", response_description="List all locations", response_model=List[LocationModel]
 )
 async def list_locations():
-    """Function to handle the GET request to list all the locations in the collection.
+    """Function to handle the GET request to
+    list all the locations in the collection.
 
-    :return: JSON objects with all the locations and an HTTP response
+    :return: JSON objects with all the
+    locations and an HTTP response
     """
     locations = await location_service.list_locations()
     return JSONResponse(status_code=status.HTTP_200_OK, content=locations)
