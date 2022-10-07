@@ -12,6 +12,11 @@ location_db.collection = Collections.location.name
 
 
 async def create_location(location: LocationModel):
+    """Function to add a new location to the location collection
+
+    :param location: LocationModel object containing the required tuple details
+    :return: the inserted tuple
+    """
     location = jsonable_encoder(location)
     new_location = await location_db.collection.insert_one(location)
     created_location = await location_db.collection.find_one(
@@ -21,6 +26,12 @@ async def create_location(location: LocationModel):
 
 
 async def list_locations(limit: int = 1000):
+    """Function to list all the locations in the collection
+
+    :param limit: maximum number to entries to be fetched,
+    defaults to 1000
+    :return: all the locations
+    """
     # TODO: remove to_list & add skip and list
     # https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find
     students = await location_db.collection.find().to_list(limit)
@@ -28,6 +39,12 @@ async def list_locations(limit: int = 1000):
 
 
 async def get_location(id: str):
+    """Function to get a particular location from the collection
+
+    :param id: id of the location to be retrieved.
+    :type id: str
+    :return: the requested location
+    """
     if (location := await location_db.collection.find_one({"_id": id})) is not None:
         return location
     else:
@@ -35,6 +52,13 @@ async def get_location(id: str):
 
 
 async def update_location(id: str, location: UpdateLocationModel):
+    """Function to update a particular entry
+
+    :param id: id of the entry to be updated
+    :type id: str
+    :param location: UpdateLocationModel object with the updated details
+    :return: the updated details
+    """
     location_dict: Dict[str, str] = {
         k: v for k, v in location.dict().items() if v is not None
     }
@@ -57,6 +81,12 @@ async def update_location(id: str, location: UpdateLocationModel):
 
 
 async def delete_location(id: str):
+    """Function to delete a particular entry
+
+    :param id: id of the entry to be deleted
+    :type id: str
+    :return: the deleted details
+    """
     delete_result = await location_db.collection.delete_one({"_id": id})
     if delete_result.deleted_count == 1:
         return True
