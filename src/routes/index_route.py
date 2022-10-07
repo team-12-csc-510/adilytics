@@ -12,6 +12,12 @@ templates = Jinja2Templates(directory="templates")
 
 @router.get("/")
 async def get_index(request: Request):
+    """Function to handle the GET request to get a particular index from the
+    collection
+
+    :param request: Request of the index to be retrieved.
+    :return: JSON object with the requested index and HTTP response or an HTTP error
+    """
     val = await create_obj()
     return templates.TemplateResponse(
         "index2.html",
