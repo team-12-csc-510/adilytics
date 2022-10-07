@@ -29,7 +29,7 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" id="nav-link-button" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Home</a>
@@ -166,8 +166,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="{{ url_for('static', path='dist/img/logo.svg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Adalytics</span>
+      <img src="{{ url_for('static', path='dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Adilytics</span>
     </a>
 
     <!-- Sidebar -->
@@ -868,8 +868,7 @@
               <div class="info-box-content">
                 <span class="info-box-text">Click Count</span>
                 <span class="info-box-number">
-                  {{data.total_clicks}}
-                  <small>%</small>
+                  {{data.click_count}}
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -955,7 +954,8 @@
                 <div class="row">
                   <div class="col-md-6">
                     <p class="text-center">
-                      {{data}}
+<!--                      {{data}}-->
+                      Sales Data
                     </p>
 
                     <div class="chart">
@@ -967,7 +967,7 @@
                   <!-- /.col -->
                   <div class="col-md-6">
                     <p class="text-center">
-                      <strong>Chart2</strong>
+                      <strong>Visitors Data</strong>
                     </p>
 
                     <div class="progress-group">
@@ -990,7 +990,7 @@
                     <div class="description-block border-right">
                       <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
                       <h5 class="description-header">$35,210.43</h5>
-                      <span class="description-text">TOTAL REVENUE</span>
+                      <span class="description-text">CHANGE IN REVENUE</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -1468,7 +1468,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Browser Usage</h3>
+                <h3 class="card-title">Revenue by Ad Type</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -1484,19 +1484,19 @@
                 <div class="row">
                   <div class="col-md-8">
                     <div class="chart-responsive">
-                      <canvas id="pieChart" height="150"></canvas>
+                      <canvas id="pieChart" height="250"></canvas>
                     </div>
                     <!-- ./chart-responsive -->
                   </div>
                   <!-- /.col -->
                   <div class="col-md-4">
                     <ul class="chart-legend clearfix">
-                      <li><i class="far fa-circle text-danger"></i> Chrome</li>
-                      <li><i class="far fa-circle text-success"></i> IE</li>
-                      <li><i class="far fa-circle text-warning"></i> FireFox</li>
-                      <li><i class="far fa-circle text-info"></i> Safari</li>
-                      <li><i class="far fa-circle text-primary"></i> Opera</li>
-                      <li><i class="far fa-circle text-secondary"></i> Navigator</li>
+                      <li><i class="far fa-circle text-danger"></i> Small Ad</li>
+                      <li><i class="far fa-circle text-success"></i> Medium Ad</li>
+                      <li><i class="far fa-circle text-warning"></i> Large Ads </li>
+                      <li><i class="far fa-circle text-info"></i> Video</li>
+                      <br>
+                      <br>
                     </ul>
                   </div>
                   <!-- /.col -->
@@ -1508,15 +1508,7 @@
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item">
                     <a href="#" class="nav-link">
-                      United States of America
-                      <span class="float-right text-danger">
-                        <i class="fas fa-arrow-down text-sm"></i>
-                        12%</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      India
+                      New York
                       <span class="float-right text-success">
                         <i class="fas fa-arrow-up text-sm"></i> 4%
                       </span>
@@ -1524,7 +1516,7 @@
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link">
-                      China
+                      Raleigh
                       <span class="float-right text-warning">
                         <i class="fas fa-arrow-left text-sm"></i> 0%
                       </span>
@@ -1702,6 +1694,22 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ url_for('static', path='dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+{% block scripts %}
+<script type="text/javascript">
+window.appConfig = {
+    sales_data: '{{ sales | tojson | safe }}',
+    ads :'{{ ads | tojson | safe }}',
+    revenue :'{{ revenue | tojson | safe }}',
+    visitors :'{{ visitors | tojson | safe }}',
+    locations:'{{ locations | tojson | safe }}'
+}
+</script>
 <script src="{{ url_for('static', path='dist/js/pages/dashboard2.js') }}"></script>
+{% endblock %}
+
+<script>
+  document.getElementById("nav-link-button").click();
+
+</script>
 </body>
 </html>

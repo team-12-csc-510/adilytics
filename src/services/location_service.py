@@ -30,6 +30,8 @@ async def list_locations(limit: int = 1000):
 async def get_location(id: str):
     if (location := await location_db.collection.find_one({"_id": id})) is not None:
         return location
+    else:
+        return None
 
 
 async def update_location(id: str, location: UpdateLocationModel):
