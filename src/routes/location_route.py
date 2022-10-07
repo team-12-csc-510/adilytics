@@ -36,12 +36,13 @@ async def list_locations():
     "/{id}", response_description="Get a single location", response_model=LocationModel
 )
 async def get_location(id: str):
-    """Function to handle the GET request to get a particular location from the
-    collection
+    """Function to handle the GET request to get a
+    particular location from the collection
 
     :param id: id of the location to be retrieved.
     :type id: str
-    :return: JSON object with the requested ad and HTTP response or an HTTP error
+    :return: JSON object with the requested ad
+    and HTTP response or an HTTP error
     """
     if (location := await location_service.get_location(id)) is not None:
         return JSONResponse(status_code=status.HTTP_200_OK, content=location)
@@ -54,13 +55,16 @@ async def get_location(id: str):
     "/{id}", response_description="Update a location", response_model=LocationModel
 )
 async def update_location(id: str, location: UpdateLocationModel = Body(...)):
-    """Function to handle the GET request to get a particular location from the
+    """Function to handle the GET request
+    to get a particular location from the
     collection
 
-    :param location: UpdateLocationModel object containing the required tuple details
+    :param location: UpdateLocationModel object
+    containing the required tuple details
     :param id: id of the location to be retrieved.
     :type id: str
-    :return: JSON object with the requested ad and HTTP response or an HTTP error
+    :return: JSON object with the requested ad
+    and HTTP response or an HTTP error
     """
     if (location := await location_service.update_location(id, location)) is not None:
         return JSONResponse(status_code=status.HTTP_200_OK, content=location)
@@ -75,7 +79,8 @@ async def update_location(id: str, location: UpdateLocationModel = Body(...)):
     status_code=status.HTTP_204_NO_CONTENT,
 )
 async def delete_location(id: str):
-    """Function to handle the DELETE request, to delete a particular entry
+    """Function to handle the DELETE request,
+    to delete a particular entry
 
     :param id: id of the entry to be deleted
     :type id: str
