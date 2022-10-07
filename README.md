@@ -10,10 +10,9 @@
 
 <p align = center>
   <a href="">
-    <img src="/media/adylitics_logo.jpeg" alt="Logo" height="400" width="800"/>
+    <img src="/media/adylitics_logo.jpeg" alt="Logo" height="400" width="600"/>
   </a>
 </p>
-
 # Project 1: Perform the advertisement analytics on a platform and visualise the results.
 
 Team 12's submission for Project 1 for CSC-510.
