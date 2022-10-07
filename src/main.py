@@ -17,6 +17,7 @@ from .routes import (
 
 # Initialize App
 app = FastAPI()
+
 # Load App settings
 settings = config.Settings()
 script_dir = os.path.dirname(__file__)
