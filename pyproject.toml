@@ -20,6 +20,8 @@ pytest-cov = "^4.0.0"
 Jinja2 = "^3.1.2"
 Sphinx = "^5.2.3"
 sphinx-rtd-theme = "^1.0.0"
+httpx = "^0.23.0"
+trio = "^0.22.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.0"
