@@ -84,17 +84,17 @@ async def get_user_info_with_location():
         if user["location_id"] not in data:
             data[user["location_id"]] = {}
             data[user["location_id"]]["value"] = 1
-            data[user["location_id"]]["longitude"] = location_detail["longitude"]
-            data[user["location_id"]]["latitude"] = location_detail["latitude"]
+            data[user["location_id"]]["longitude"] = location_detail["lon"]
+            data[user["location_id"]]["latitude"] = location_detail["lat"]
             data[user["location_id"]]["tooltip"] = {}
-            data[user["location_id"]]["tooltip"]["content"] = "Hmm {}".format(
+            data[user["location_id"]]["tooltip"]["content"] = "{} {}".format(location_detail["city"],
                 data[user["location_id"]]["value"]
             )
             # < span
             # style =\"font-weight:bold;\">{}</span><br />'.format('abc')
         else:
             data[user["location_id"]]["value"] = data[user["location_id"]]["value"] + 1
-            data[user["location_id"]]["tooltip"]["content"] = "Hmm {}".format(
+            data[user["location_id"]]["tooltip"]["content"] = "{} {}".format(location_detail["city"],
                 data[user["location_id"]]["value"]
             )
     return data
