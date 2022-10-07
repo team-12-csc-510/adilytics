@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/team-12-csc-510/adilytics/branch/main/graph/badge.svg?token=TKKWAHLJIO)](https://codecov.io/gh/team-12-csc-510/adilytics)
 [![DOI](https://zenodo.org/badge/540565328.svg)](https://zenodo.org/badge/latestdoi/540565328)
 
-<img alt="Adylitics Logo" height="auto" src="/media/adylitics_logo.jpeg" width="400"/>
+<img alt="Adylitics Logo" height="auto" src="/media/adylitics_logo.jpeg" width="600"/>
 
 # Project 1: Perform the advertisement analytics on a platform and visualise the results.
 
