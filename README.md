@@ -8,9 +8,19 @@
 [![Issues_Open](https://img.shields.io/github/issues-raw/team-12-csc-510/adilytics)](https://github.com/team-12-csc-510/adilytics/issues?q=is%3Aopen+is%3Aissue)
 [![Issues_Closed](https://img.shields.io/github/issues-closed/team-12-csc-510/adilytics)](https://github.com/team-12-csc-510/adilytics/issues?q=is%3Aissue+is%3Aclosed)
 
+<p>
+  <a href="">
+    <img src="/media/adylitics_logo.jpeg" alt="Logo" height="400" width="600"/>
+  </a>
+</p>
+
 # Project 1: Perform the advertisement analytics on a platform and visualise the results.
 
 Team 12's submission for Project 1 for CSC-510.
+
+## Here is a quick introduction video:
+
+https://user-images.githubusercontent.com/112341004/194640685-1cfeffa0-c33c-4c2f-b2c5-de64d47c637a.mp4
 
 ## Table Of Contents
 
