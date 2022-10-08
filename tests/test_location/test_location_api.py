@@ -17,7 +17,7 @@ class TestLocationRoute(unittest.TestCase):
 
     @pytest.mark.anyio
     async def test_list_locations(self):
-        response = await self.client.get("/")
+        response = await self.client.get("/locations/")
         assert len(response.json()) > 1
 
     @pytest.mark.anyio
