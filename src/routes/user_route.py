@@ -13,7 +13,7 @@ router = APIRouter(prefix="/user")
 async def create_user(user: UserModel = Body(...)):
     """Function to handle the POST request to add a new user to the ad collection
 
-    :param ad: UserModel object containing the required tuple details
+    :param user: UserModel object containing the required tuple details
     :return: JSON object with the inserted tuple along with an HTTP response
     """
     created_user = await user_service.create_user(user)
@@ -51,7 +51,7 @@ async def update_user(id: str, user: UpdateUserModel = Body(...)):
 
     :param id: id of the entry to be updated
     :type id: str
-    :param ad: UpdateUserModel object with the new details
+    :param user: UpdateUserModel object with the new details
     :return: JSON object with the updated details and HTTP response or an HTTP error
     """
     if (user := await user_service.update_user(id, user)) is not None:

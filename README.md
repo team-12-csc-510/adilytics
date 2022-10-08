@@ -8,8 +8,6 @@
 [![Issues_Open](https://img.shields.io/github/issues-raw/team-12-csc-510/adilytics)](https://github.com/team-12-csc-510/adilytics/issues?q=is%3Aopen+is%3Aissue)
 [![Issues_Closed](https://img.shields.io/github/issues-closed/team-12-csc-510/adilytics)](https://github.com/team-12-csc-510/adilytics/issues?q=is%3Aissue+is%3Aclosed)
 
-
-
 # Project 1: Perform the advertisement analytics on a platform and visualise the results.
 
 Team 12's submission for Project 1 for CSC-510.
