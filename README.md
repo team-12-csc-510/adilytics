@@ -1,5 +1,6 @@
 # adilytics
 
+
 ![example branch parameter](https://github.com/team-12-csc-510/adilytics/actions/workflows/main.yml/badge.svg?branch=main)
 [![PyPI - License](https://img.shields.io/pypi/l/FastAPI)](https://opensource.org/licenses/MIT)
 ![Made By](https://img.shields.io/badge/Made_By-Python3.9-green)
@@ -8,11 +9,12 @@
 [![Issues_Open](https://img.shields.io/github/issues-raw/team-12-csc-510/adilytics)](https://github.com/team-12-csc-510/adilytics/issues?q=is%3Aopen+is%3Aissue)
 [![Issues_Closed](https://img.shields.io/github/issues-closed/team-12-csc-510/adilytics)](https://github.com/team-12-csc-510/adilytics/issues?q=is%3Aissue+is%3Aclosed)
 
-<p>
+<p align="center">
   <a href="">
-    <img src="/media/adylitics_logo.jpeg" alt="Logo" height="400" width="600"/>
+    <img src="/media/adylitics_logo.jpeg" alt="Logo" height="350" width="450"/>
   </a>
 </p>
+
 
 # Project 1: Perform the advertisement analytics on a platform and visualise the results.
 
