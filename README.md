@@ -125,5 +125,9 @@ Shubhender Singh  | ssingh54
 
 ______________________________________________________________________
 
+## Group Communication WhatsApp [Chat](https://drive.google.com/file/d/1t5o6hprtw_F5KfbjoJpMio1sVUiDYe9y/view?usp=sharing)
+
+______________________________________________________________________
+
 [poetry]: https://python-poetry.org/
 [python]: https://python.org
