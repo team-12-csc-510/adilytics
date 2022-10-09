@@ -25,7 +25,7 @@ See the [Table of Contents](#table-of-contents) for different ways to help and d
 This project and everyone participating in it is governed by the
 [csc-510 Code of Conduct](https://github.com/team-12-csc-510/adilytics/blob/main/CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. Please report unacceptable behavior
-to \<>.
+to [rtiwari2@ncsu.edu](rtiwari2@ncsu.edu).
 
 ## Asking Questions
 
