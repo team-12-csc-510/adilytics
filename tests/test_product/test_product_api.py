@@ -42,7 +42,7 @@ class TestProductRoute(unittest.TestCase):
         assert response.json()["name"] == "product-xyz"
 
     @pytest.mark.anyio
-    async def test_patch_specific_location(self):
+    async def test_patch_specific_product(self):
         response = self.client.patch(
             f"/product/{self.product_id}",
             json={
@@ -54,8 +54,8 @@ class TestProductRoute(unittest.TestCase):
         assert response.json()["cost"] == 34.21
 
     @pytest.mark.anyio
-    async def test_delete_specific_location(self):
+    async def test_delete_specific_product(self):
         response = self.client.delete(
-            f"/click/{self.click_id}",
+            f"/product/{self.product_id}",
         )
         assert response.status_code == 204

@@ -47,7 +47,7 @@ class TestClickRoute(unittest.TestCase):
     @pytest.mark.anyio
     async def test_patch_specific_click(self):
         response = self.client.patch(
-            f"/click/{self.location_id}",
+            f"/click/{self.click_id}",
             json={
                 "ad_id": "random_ad_1234",
                 "user_id": "random_user_123",
@@ -62,6 +62,6 @@ class TestClickRoute(unittest.TestCase):
     @pytest.mark.anyio
     async def test_delete_specific_click(self):
         response = self.client.delete(
-            f"/click/{self.location_id}",
+            f"/click/{self.click_id}",
         )
         assert response.status_code == 204
