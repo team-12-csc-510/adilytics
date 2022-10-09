@@ -91,6 +91,26 @@ You can refer to the link to learn more about its working [Locust](https://docs.
 
 Locust is used to run load tests distributed over multiple machines. It is event-based (using [gevent](http://www.gevent.org/)), which makes it possible for a single process to handle many thousands concurrent users. While there alternatives capable of doing more requests per second on a given hardware, the low overhead of each Locust user makes it very suitable for testing highly concurrent workloads.
 
+<ins> How to run Locust script in the project </ins>
+
+Run the scripts in the following order:
+
+1. product_creation.py
+1. ad_creation.py
+1. user_simulation.py
+
+To run product_creation.py:  locust -f product_creation.py --headless -H  http://127.0.0.1:8000 -u 1 -r 1
+
+Run this script with just one thread to create 50 products (-u 1 -r 1)
+
+To run ad_creation.py:  locust -f ad_creation.py --headless -H  http://127.0.0.1:8000 -u 50 -r 50
+
+Run this script with as many number of threads as you want to create ads.
+
+To run user_simulation.py: locust -f user_simulation.py --headless -H  http://127.0.0.1:8000 -u 50 -r 50 .
+
+Run this script with as many number of threads as you want to simulate users.
+
 ______________________________________________________________________
 
 ## Team
